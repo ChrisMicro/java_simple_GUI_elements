@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 
 public class CHValue extends CHObject
 {
-	JLabel labelText;
+//	JLabel labelText;
 	JTextField valueText;
 //	static int next_xPosition=0;
 //	static int next_yPosition=0;
@@ -19,6 +19,7 @@ public class CHValue extends CHObject
 	
 	public CHValue(String label, String value)
 	{
+		super(label);
 		labelText=new JLabel(label);
 		super.add(labelText,"West");
 		valueText=new JTextField(value);

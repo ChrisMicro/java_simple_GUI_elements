@@ -21,6 +21,7 @@ public class CHSlider extends CHObject
 
 	public CHSlider(String label, int value)
 	{
+		super(label);
 		super.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 		labelText=new JLabel(label);

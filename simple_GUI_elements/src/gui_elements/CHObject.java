@@ -14,7 +14,7 @@ import javax.swing.event.ChangeListener;
 public class CHObject extends JPanel
 {
 
-	JLabel labelText;
+	public JLabel labelText;
 
 	static int next_xPosition=0;
 	static int next_yPosition=0;
@@ -22,9 +22,9 @@ public class CHObject extends JPanel
 	int width=300;
 	int heigth=50;
 
-	public CHObject()
+	public CHObject(String name)
 	{
-
+		labelText=new JLabel(name);
 	}
 	
 	// minimalistic layout manager
