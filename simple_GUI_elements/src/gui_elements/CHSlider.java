@@ -27,7 +27,6 @@ public class CHSlider extends JPanel
 		super.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 		labelText=new JLabel(label);
-		//super.add(labelText,"West");
 		super.add(labelText);
 
 		JSlider meinSlider = new JSlider();
@@ -43,9 +42,7 @@ public class CHSlider extends JPanel
  		meinSlider.setPaintLabels(true);
  		meinSlider.setValue(value);
  		meinSlider.addChangeListener(new SliderListener());
-		//super.add(meinSlider,"East");
  		super.add(meinSlider);
-		//meinSlider.setPreferredSize( new Dimension( 100, heigth ) );
  		
 		valueText=new JTextField(""+value);
 		super.add(valueText);
