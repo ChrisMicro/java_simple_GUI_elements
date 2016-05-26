@@ -7,12 +7,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class CHValue extends JPanel
+public class CHValue extends CHObject
 {
 	JLabel labelText;
 	JTextField valueText;
-	static int next_xPosition=0;
-	static int next_yPosition=0;
+//	static int next_xPosition=0;
+//	static int next_yPosition=0;
 	
 	int width=200;
 	int heigth=25;
@@ -28,15 +28,7 @@ public class CHValue extends JPanel
 		super.setBounds(next_xPosition,next_yPosition,width,heigth);
 		next_yPosition+=heigth;
 	}
-	
-	public void setPosition(int x, int y)
-	{
-		super.setBounds(x,y,width,heigth);
-		next_yPosition+=heigth;	
-		next_yPosition+=heigth;	
-		next_xPosition=x;
-	}
-	
+
 	public void setValueText(String value)
 	{
 		valueText.setText(value);

@@ -11,16 +11,13 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class CHSlider extends JPanel
+public class CHSlider extends CHObject
 {
 
-	JLabel labelText;
 	JTextField valueText;
-	static int next_xPosition=0;
-	static int next_yPosition=0;
 	
-	int width=300;
-	int heigth=50;
+//	int width=300;
+//	int heigth=50;
 
 	public CHSlider(String label, int value)
 	{
@@ -52,15 +49,7 @@ public class CHSlider extends JPanel
 		super.setBounds(next_xPosition,next_yPosition,width,heigth);
 		next_yPosition+=heigth;
 	}
-	
-	public void setPosition(int x, int y)
-	{
-		super.setBounds(x,y,width,heigth);
-		next_yPosition+=heigth;	
-		next_yPosition+=heigth;	
-		next_xPosition=x;
-	}
-	
+
 	public void setValueText(String value)
 	{
 		valueText.setText(value);

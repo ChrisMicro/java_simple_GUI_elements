@@ -21,11 +21,10 @@ public class ATestAllExample
 
 		CHValue value1=new CHValue("example","CHValue");
 		fenster.add(value1);
-		value1.setPosition(20, 20);
+		value1.setPosition(40, 20);
 	
 		CHValue value2=new CHValue("number","123");
 		fenster.add(value2);
-
 
 		CHSlider value3=new CHSlider("CHSlider",5);
 		fenster.add(value3);
@@ -33,7 +32,6 @@ public class ATestAllExample
 		
 		CHSlider value4=new CHSlider("speed [m/s]",10);
 		fenster.add(value4);
-		value4.setPosition(150, 250);
 				
 		fenster.pack();
 		fenster.setVisible(true);
