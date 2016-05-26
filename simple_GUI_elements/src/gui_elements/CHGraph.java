@@ -30,10 +30,10 @@ public class CHGraph extends CHObject
 		xAchsePos=yDimension/2;
 		yAchsePos=40;
 		
-		// test data
+		// dummy test data
 		for(int n=0;n<dataSize;n++)daten[n]=Math.sin((double)n/5);
-		xMax=dataSize;
 		
+		xMax=dataSize;		
 		scalex=xDimension/(xMax-xMin);
 		
 		width=xDimension;
@@ -42,25 +42,33 @@ public class CHGraph extends CHObject
 		next_yPosition+=heigth;
 	}
 	
+	public CHGraph(String graphName,double[] data)
+	{
+		this(graphName);
+
+		daten=data;
+		dataSize=daten.length;
+		xMax=dataSize;		
+		scalex=xDimension/(xMax-xMin);
+	}
+	
 	@Override 
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g); // original paintComponent aus JPanel aufrufen
 		g.setColor(Color.blue);
 		
-		double y=0;
+		for(int n=0;n<(dataSize-2);n++)
+		{
 
-			for(int n=0;n<(dataSize-2);n++)
-			{
+			int p1x=(int)(n*scalex);
+			int p1y=(int)(daten[n]*scaley);
+			int p2x=(int)((n+1)*scalex);
+			int p2y=(int)(daten[n+1]*scaley);
+			
+			g.drawLine(yAchsePos+p1x,xAchsePos-p1y,yAchsePos+p2x,xAchsePos-p2y);
 
-				int p1x=(int)(n*scalex);
-				int p1y=(int)(daten[n]*scaley);
-				int p2x=(int)((n+1)*scalex);
-				int p2y=(int)(daten[n+1]*scaley);
-				
-				g.drawLine(yAchsePos+p1x,xAchsePos-p1y,yAchsePos+p2x,xAchsePos-p2y);
-				y=daten[n+1];
-			}
+		}
 
 
 		// draw axis

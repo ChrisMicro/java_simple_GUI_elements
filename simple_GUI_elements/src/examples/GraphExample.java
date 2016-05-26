@@ -19,11 +19,14 @@ public class GraphExample
 
 	    fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		CHGraph value1=new CHGraph("temperature");
-		value1.setPosition(100, 100);
+		CHGraph value1=new CHGraph("signal");
+		value1.setPosition(100, 10);
 		fenster.add(value1);
 		
-		CHGraph value2=new CHGraph("temperature");
+		int dataSize=500;
+		double[] daten=new double[dataSize];
+		for(int n=0;n<dataSize;n++)daten[n]=Math.sin((double)n/5);
+		CHGraph value2=new CHGraph("HF signal",daten);
 
 		fenster.add(value2);
 
