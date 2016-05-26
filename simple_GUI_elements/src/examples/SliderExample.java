@@ -13,17 +13,17 @@ public class SliderExample
 	{
 		JFrame fenster;
 		fenster=new JFrame("slider example");
-	    fenster.setPreferredSize(new Dimension(640, 480));
-	    fenster.getContentPane().setLayout(null);
-
-	    fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		fenster.setPreferredSize(new Dimension(640, 480));
+		fenster.getContentPane().setLayout(null);
+		
+		fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		CHSlider value1=new CHSlider("name",123);
 		fenster.add(value1);
-	
+		
 		CHSlider value2=new CHSlider("weight",0);
 		fenster.add(value2);
-
+		
 		CHSlider value3=new CHSlider("speed",5);
 		fenster.add(value3);
 		value3.setPosition(200, 200);
