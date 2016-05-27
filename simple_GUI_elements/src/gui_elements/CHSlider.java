@@ -22,8 +22,8 @@ public class CHSlider extends CHObject
 	int sliderValue;
 	int textHeigth=20;
 	int labelWidth=80;
-	int sliderWidth=200;
-	int textFieldWidth=80;
+	int sliderWidth=160;
+	int textFieldWidth=60;
 //	int width=300;
 //	int heigth=50;
 
@@ -38,8 +38,9 @@ public class CHSlider extends CHObject
 		//GridBagLayout gbl=new GridBagLayout();
 		//c.setLayout(gbl);
 		
-		labelText=new JLabel(label,SwingConstants.RIGHT);
-		labelText.setBounds(0,0,width/4,textHeigth);
+		//labelText=new JLabel(label,SwingConstants.RIGHT);
+		labelText=new JLabel(label,SwingConstants.CENTER);
+		labelText.setBounds(0,5,labelWidth,textHeigth);
 		
 		super.add(labelText);
 		
@@ -63,12 +64,12 @@ public class CHSlider extends CHObject
  		meinSlider.setPaintLabels(true);
  		meinSlider.setValue(value);
  		meinSlider.addChangeListener(new SliderListener());
- 		meinSlider.setBounds(width/4,0,width/4*2,heigth);
+ 		meinSlider.setBounds(labelWidth,0,sliderWidth,heigth);
  		super.add(meinSlider);
  		
 		valueText=new JTextField(""+value);
 		valueText.setHorizontalAlignment(SwingConstants.CENTER);
-		valueText.setBounds(width/4*3,0,width/4,textHeigth);
+		valueText.setBounds(labelWidth+sliderWidth,0,textFieldWidth,textHeigth);
 		super.add(valueText);
 		valueText.setCaretColor(Color.WHITE);
 		valueText.setPreferredSize( new Dimension( 100, 20 ) );
