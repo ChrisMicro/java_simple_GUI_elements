@@ -15,26 +15,34 @@ public class CHSlider extends CHObject
 {
 
 	JTextField valueText;
+	int sliderValue;
 	
 //	int width=300;
 //	int heigth=50;
 
-	public CHSlider(String label, int value)
+	public CHSlider(String label, int value, int min, int max)
 	{
 		super(label);
 		super.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 		labelText=new JLabel(label);
 		super.add(labelText);
+		
+		sliderValue=value;
 
 		JSlider meinSlider = new JSlider();
 		 
-		meinSlider.setMinimum(0);
+		meinSlider.setMinimum(min);
 
-		meinSlider.setMaximum(20);
+		meinSlider.setMaximum(max);
 
-		meinSlider.setMajorTickSpacing(5);
-		meinSlider.setMinorTickSpacing(1);
+		int minorSpace=(max-min)/20;
+		int majorSpace=minorSpace*5;
+		
+		meinSlider.setMajorTickSpacing(majorSpace);
+		meinSlider.setMinorTickSpacing(minorSpace);
+		//meinSlider.setMajorTickSpacing(5);
+		//meinSlider.setMinorTickSpacing(1);
  		meinSlider.createStandardLabels(1);
  		meinSlider.setPaintTicks(true);
  		meinSlider.setPaintLabels(true);
@@ -50,10 +58,19 @@ public class CHSlider extends CHObject
 		super.setBounds(next_xPosition,next_yPosition,width,heigth);
 		next_yPosition+=heigth;
 	}
+	public CHSlider(String label, int value)
+	{
+		this(label, value, 0, 20);
+	}
 
 	public void setValueText(String value)
 	{
 		valueText.setText(value);
+	}
+	
+	public int getInt()
+	{
+		return sliderValue;
 	}
 	
 	class SliderListener implements ChangeListener {
@@ -62,6 +79,7 @@ public class CHSlider extends CHObject
 	        JSlider source = (JSlider)e.getSource();
 
             int value = (int)source.getValue();
+            sliderValue=value;
             valueText.setText(""+value);
 	    }
 	}

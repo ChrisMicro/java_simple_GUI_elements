@@ -31,8 +31,8 @@ public class ATestAllExample
 		fenster.add(value3);
 		value3.setPosition(150, 60);
 		
-		CHSlider value4=new CHSlider("speed [m/s]",10);
-		fenster.add(value4);
+		CHSlider rateSlider=new CHSlider("rate [ms]",100,0,100);
+		fenster.add(rateSlider);
 		
 		int dataSize=500;
 		double[] daten=new double[dataSize];
@@ -40,9 +40,25 @@ public class ATestAllExample
 		CHGraph value5=new CHGraph("simple graph",daten);
 		fenster.add(value5);
 		value5.setPosition(150, 200);
-				
+		
 		fenster.pack();
 		fenster.setVisible(true);
+		
+		// dynamically update chart 
+		for(int n=0;n<10000;n++)
+		{
+			value5.addValue(Math.sin((double)n/10));
+			
+			int delay_ms=rateSlider.getInt();
+			// delay
+		    try 
+		    {
+		        Thread.sleep(delay_ms);           
+		    } catch(InterruptedException ex) 
+		    {
+		        Thread.currentThread().interrupt();
+		    }
+		}
 		
 	}
 }

@@ -2,9 +2,6 @@ package gui_elements;
 import java.awt.Color;
 import java.awt.Graphics;
 
-
-
-
 public class CHGraph extends CHObject 
 {
 	private int xAchsePos;
@@ -20,6 +17,8 @@ public class CHGraph extends CHObject
 	double xMax=10000;
 	double xMin=0;
 	
+	RingBuffer buffer;
+	
 	public CHGraph(String graphName)
 	{
 		super(graphName);
@@ -32,9 +31,10 @@ public class CHGraph extends CHObject
 		
 		// dummy test data
 		for(int n=0;n<dataSize;n++)daten[n]=Math.sin((double)n/5);
+		buffer=new RingBuffer(daten);
 		
-		xMax=dataSize;		
-		scalex=xDimension/(xMax-xMin);
+		xMax=daten.length;		
+		scalex=(xDimension-yAchsePos)/(xMax-xMin);
 		
 		width=xDimension;
 		heigth=yDimension;
@@ -45,11 +45,19 @@ public class CHGraph extends CHObject
 	public CHGraph(String graphName,double[] data)
 	{
 		this(graphName);
-
+		
+		buffer=new RingBuffer(data);
+		
 		daten=data;
 		dataSize=daten.length;
 		xMax=dataSize;		
-		scalex=xDimension/(xMax-xMin);
+		scalex=(xDimension-yAchsePos)/(xMax-xMin);
+	}
+	
+	public void addValue(double value)
+	{
+		buffer.ringBufferAdd(value);
+		repaint();
 	}
 	
 	@Override 
@@ -62,9 +70,9 @@ public class CHGraph extends CHObject
 		{
 
 			int p1x=(int)(n*scalex);
-			int p1y=(int)(daten[n]*scaley);
+			int p1y=(int)(buffer.ringBufGetValue(n)*scaley);
 			int p2x=(int)((n+1)*scalex);
-			int p2y=(int)(daten[n+1]*scaley);
+			int p2y=(int)(buffer.ringBufGetValue(n+1)*scaley);
 			
 			g.drawLine(yAchsePos+p1x,xAchsePos-p1y,yAchsePos+p2x,xAchsePos-p2y);
 
