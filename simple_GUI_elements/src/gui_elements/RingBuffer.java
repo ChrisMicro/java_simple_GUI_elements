@@ -31,7 +31,7 @@ public class RingBuffer
 		writePosition = 0;
 		fillSize      = 0;
 	}
-	
+		
 	public void setData(double[] data)
 	{
 		this.data=data;
@@ -39,15 +39,38 @@ public class RingBuffer
 		writePosition = 0;
 		fillSize      = bufferSize;
 	}
-	public RingBuffer(double[] data)
+	
+	public static double[] copyFromIntArray(int[] source) {
+	    double[] dest = new double[source.length];
+	    for(int i=0; i<source.length; i++) {
+	        dest[i] = source[i];
+	    }
+	    return dest;
+	}
+	
+	public void setData(int[] data)
 	{
-		this.setData(data);
-		/*
-		this.data=data;
+		this.data=copyFromIntArray(data);
 		bufferSize=data.length;
 		writePosition = 0;
 		fillSize      = bufferSize;
-		*/
+	}
+	
+	public double[] getData()
+	{
+		double [] data=new double[fillSize];
+		for(int n=0;n<fillSize;n++) ringBufGetValue(n);
+		return data;
+	}
+	
+	public RingBuffer(double[] data)
+	{
+		this.setData(data);
+	}
+	
+	public RingBuffer(int[] data)
+	{
+		this.setData(data);
 	}
 	
 	public void ringBufferAdd( double value)

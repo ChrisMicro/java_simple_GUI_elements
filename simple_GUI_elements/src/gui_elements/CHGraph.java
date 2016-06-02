@@ -2,23 +2,35 @@ package gui_elements;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import javax.swing.SwingUtilities;
+
 public class CHGraph extends CHObject 
 {
 	private int xAchsePos;
 	private int yAchsePos;
-	private int xDimension=300;
-	private int yDimension=200;
+	private int xDimension=400;
+	private int yDimension=300;
 	
 	double daten[];
 	int dataSize=100;
 	
 	double scalex=1;
-	double scaley=50;
-	double xMax=10000;
+	double scaley=0.5;
+	
 	double xMin=0;
+	double xMax=10000;
+
+	double yMin=-256;
+	double yMax=256;
 	
 	RingBuffer buffer;
 	
+	public void setMinMaxY(double yMin, double yMax)
+	{
+		this.yMin=yMin;
+		this.yMax=yMax;
+		scaley=yDimension/2/(yMax-yMin);
+	}
 	public CHGraph(String graphName)
 	{
 		super(graphName);
@@ -54,10 +66,42 @@ public class CHGraph extends CHObject
 		scalex=(xDimension-yAchsePos)/(xMax-xMin);
 	}
 	
+	public void setData(double[] data)
+	{
+		buffer=new RingBuffer(data);
+		
+		daten=data;
+		dataSize=daten.length;
+		xMax=dataSize;		
+		scalex=(xDimension-yAchsePos)/(xMax-xMin);
+		repaint();
+	}
+	
+	public void setData(int[] data)
+	{
+		buffer=new RingBuffer(data);
+		
+		daten=buffer.getData();
+		dataSize=daten.length;
+		xMax=dataSize;		
+		scalex=(xDimension-yAchsePos)/(xMax-xMin);
+		repaint();
+	}
+	
 	public void addValue(double value)
 	{
 		buffer.ringBufferAdd(value);
-		repaint();
+		SwingUtilities.invokeLater // prevent race condition due to slow UI
+		(
+			new Runnable() 
+			{
+				@Override
+				public void run() 
+				{
+						repaint();
+				}
+			}
+		);
 	}
 	
 	@Override 

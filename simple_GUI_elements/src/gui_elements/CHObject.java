@@ -15,6 +15,7 @@ public class CHObject extends JPanel
 {
 
 	public JLabel labelText;
+	public String name;
 
 	static int next_xPosition=0;
 	static int next_yPosition=0;
@@ -35,4 +36,8 @@ public class CHObject extends JPanel
 		next_xPosition=x;
 	}
 	
+	public void setName(String name)
+	{
+		labelText.setText(name);
+	}
 }

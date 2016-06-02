@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class CHValue extends CHObject
 {
@@ -14,24 +15,43 @@ public class CHValue extends CHObject
 //	static int next_xPosition=0;
 //	static int next_yPosition=0;
 	
-	int width=200;
+	int textHeigth=20;
+	int width;
 	int heigth=25;
+	int labelWidth=80;
+	int textFieldWidth=60;
 	
 	public CHValue(String label, String value)
 	{
 		super(label);
+		width=labelWidth+textFieldWidth;
 		labelText=new JLabel(label);
 		super.add(labelText,"West");
 		valueText=new JTextField(value);
 		super.add(valueText,"East");
 		valueText.setCaretColor(Color.WHITE);
-		valueText.setPreferredSize( new Dimension( 100, 20 ) );
+		valueText.setHorizontalAlignment(SwingConstants.CENTER);
+		valueText.setPreferredSize( new Dimension( textFieldWidth, textHeigth ) );
 		super.setBounds(next_xPosition,next_yPosition,width,heigth);
 		next_yPosition+=heigth;
+	}
+	public CHValue(String label, int value)
+	{
+		this(label, ""+value);
 	}
 
 	public void setValueText(String value)
 	{
 		valueText.setText(value);
+	}
+	
+	public void setValueText(float value)
+	{
+		valueText.setText(String.format("%.2f", value));
+
+	}
+	public void setValueText(double value)
+	{
+		valueText.setText(String.format("%.2f", value));
 	}
 }

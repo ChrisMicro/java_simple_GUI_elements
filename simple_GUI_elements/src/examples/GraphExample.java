@@ -27,7 +27,7 @@ public class GraphExample
 		double[] daten=new double[dataSize];
 		for(int n=0;n<dataSize;n++)daten[n]=Math.sin((double)n/5);
 		CHGraph value2=new CHGraph("HF signal",daten);
-
+		//for(int n=0;n<dataSize;n++)value2.addValue(Math.sin((double)n/5));
 		fenster.add(value2);
 
 		

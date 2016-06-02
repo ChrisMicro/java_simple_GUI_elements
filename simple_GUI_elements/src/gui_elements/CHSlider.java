@@ -20,6 +20,7 @@ public class CHSlider extends CHObject
 
 	JTextField valueText;
 	int sliderValue;
+	
 	int textHeigth=20;
 	int labelWidth=80;
 	int sliderWidth=160;
@@ -30,18 +31,18 @@ public class CHSlider extends CHObject
 	public CHSlider(String label, int value, int min, int max)
 	{
 		super(label);
-		width=labelWidth+sliderWidth+textFieldWidth;
+		
 		//super.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		super.setLayout(null);
-		//super.setLayout(new GridLayout(3,3,6,3));
-		//Container c= super.getRootPane();
-		//GridBagLayout gbl=new GridBagLayout();
-		//c.setLayout(gbl);
-		
+
 		//labelText=new JLabel(label,SwingConstants.RIGHT);
 		labelText=new JLabel(label,SwingConstants.CENTER);
+
+		Dimension d=labelText.getPreferredSize();
+		labelWidth=d.width;
 		labelText.setBounds(0,5,labelWidth,textHeigth);
-		
+		width=labelWidth+sliderWidth+textFieldWidth;
+		//labelText.setBounds(0,5,d.width,textHeigth);
 		super.add(labelText);
 		
 		sliderValue=value;
@@ -72,7 +73,6 @@ public class CHSlider extends CHObject
 		valueText.setBounds(labelWidth+sliderWidth,0,textFieldWidth,textHeigth);
 		super.add(valueText);
 		valueText.setCaretColor(Color.WHITE);
-		valueText.setPreferredSize( new Dimension( 100, 20 ) );
 			
 		super.setBounds(next_xPosition,next_yPosition,width,heigth);
 		next_yPosition+=heigth;
