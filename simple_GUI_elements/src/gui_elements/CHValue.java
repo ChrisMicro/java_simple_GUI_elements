@@ -17,7 +17,7 @@ public class CHValue extends CHObject
 	
 	int textHeigth=20;
 	int width;
-	int heigth=25;
+	int heigth=30;
 	int labelWidth=80;
 	int textFieldWidth=60;
 	
@@ -45,12 +45,12 @@ public class CHValue extends CHObject
 		valueText.setText(value);
 	}
 	
-	public void setValueText(float value)
+	public void setValue(float value)
 	{
 		valueText.setText(String.format("%.2f", value));
 
 	}
-	public void setValueText(double value)
+	public void setValue(double value)
 	{
 		valueText.setText(String.format("%.2f", value));
 	}

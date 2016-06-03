@@ -15,6 +15,7 @@ public class CHSwitch extends CHObject implements ActionListener
 	JRadioButton button2;
 	
 	boolean switchState=false;
+	boolean isChangedFlag=false;
 	
 	public CHSwitch(String name, String offText, String onText)
 	{
@@ -47,6 +48,14 @@ public class CHSwitch extends CHObject implements ActionListener
 		return switchState;
 	}
 	
+	public boolean isChanged()
+	{
+		boolean flag;
+		flag = isChangedFlag;
+		isChangedFlag = false;
+		return flag;
+	}
+	
     public void actionPerformed(ActionEvent ae) 
     {
 
@@ -63,8 +72,9 @@ public class CHSwitch extends CHObject implements ActionListener
             switchState=true;
         }
         
-        if(switchState)System.out.println("on");
-        else System.out.println("off");
+        //if(switchState)System.out.println("on");
+        //else System.out.println("off");
+		isChangedFlag=true;
         	
     } 
 }

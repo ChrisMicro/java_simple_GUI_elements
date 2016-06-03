@@ -48,6 +48,11 @@ public class RingBuffer
 	    return dest;
 	}
 	
+	public void clear()
+	{
+		fillSize=0;
+	}
+	
 	public void setData(int[] data)
 	{
 		this.data=copyFromIntArray(data);
