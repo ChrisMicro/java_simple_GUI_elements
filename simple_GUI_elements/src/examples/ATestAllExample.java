@@ -2,6 +2,7 @@ package examples;
 
 import gui_elements.CHGraph;
 import gui_elements.CHSlider;
+import gui_elements.CHSwitch;
 import gui_elements.CHValue;
 
 import java.awt.Dimension;
@@ -11,6 +12,18 @@ import javax.swing.JFrame;
 public class ATestAllExample 
 {
 
+	public static void delay_ms(int t_ms)
+	{
+		// delay
+	    try 
+	    {
+	        Thread.sleep(t_ms);           
+	    } catch(InterruptedException ex) 
+	    {
+	        Thread.currentThread().interrupt();
+	    }
+	}
+	
 	public static void main(String[] args) 
 	{
 		JFrame fenster;
@@ -22,42 +35,34 @@ public class ATestAllExample
 
 		CHValue value1=new CHValue("example","all");
 		fenster.add(value1);
-		value1.setPosition(150, 10);
+		value1.setPosition(10, 10);
 	
-		//CHValue value2=new CHValue("number","123");
-		//fenster.add(value2);
+		CHSwitch switch1=new CHSwitch("switch1");
+		fenster.add(switch1);
+		
+		int dataSize=500;
+		double[] daten=new double[dataSize];
+		for(int n=0;n<dataSize;n++)daten[n]=Math.sin((double)n/10);
+		CHGraph graph1=new CHGraph("simple graph",daten);
+		graph1.setMinMaxY(-1.5, 1.5);
 
-		CHSlider value3=new CHSlider("CHSlider",5);
-		fenster.add(value3);
-		value3.setPosition(150, 60);
+		graph1.setPosition(200, 10);
+		
+		fenster.add(graph1);
 		
 		CHSlider rateSlider=new CHSlider("rate [ms]",100,0,100);
 		fenster.add(rateSlider);
 		
-		int dataSize=500;
-		double[] daten=new double[dataSize];
-		for(int n=0;n<dataSize;n++)daten[n]=Math.sin((double)n/5);
-		CHGraph value5=new CHGraph("simple graph",daten);
-		fenster.add(value5);
-		value5.setPosition(150, 200);
-		
 		fenster.pack();
 		fenster.setVisible(true);
 		
-		// dynamically update chart 
+		// loop dynamically update chart 
 		for(int n=0;n<10000;n++)
 		{
-			value5.addValue(Math.sin((double)n/10));
+			graph1.addValue(Math.sin((double)n/10));
 			
-			int delay_ms=rateSlider.getInt();
-			// delay
-		    try 
-		    {
-		        Thread.sleep(delay_ms);           
-		    } catch(InterruptedException ex) 
-		    {
-		        Thread.currentThread().interrupt();
-		    }
+			int t_ms=rateSlider.getInt();
+			delay_ms(t_ms);
 		}
 		
 	}

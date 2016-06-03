@@ -26,39 +26,38 @@ public class CHObject extends JPanel
 
 	static int next_xPosition=10;
 	static int next_yPosition=10;
-	
-	int width=100;
-	int heigth=25;
+		
+	int defaultWidth  = 100;
+	int defaultHeight = 25;
 	
 	int LayoutManagerLineDistance=5;
 	
 	public CHObject(String name)
 	{
 		labelText=new JLabel(name);
-		//this.setBounds(next_xPosition,next_yPosition,width,heigth);
-		setPosition(next_xPosition,next_yPosition);
+
+		setBounds(next_xPosition,next_yPosition,defaultWidth,defaultHeight);
 	}
 	
 	public void setName(String name)
 	{
-		labelText.setText(name);
-		
+		labelText.setText(name);	
 	}
 	
 	// minimalistic layout manager
 	public void setPosition(int x, int y)
 	{
-		this.setBounds(x, y, width, heigth);
+		this.setBounds(x, y, this.getWidth(),this.getHeight());
+
 	}
 	
-
 	@Override 
 	public void setBounds(int x, int y, int width, int height)
 	{
 		super.setBounds(x, y, width, height);
 
-		next_yPosition=y+heigth+LayoutManagerLineDistance;	
-		next_xPosition=x;
+		next_yPosition = y+this.getHeight() + LayoutManagerLineDistance;	
+		next_xPosition = x;
 	}
 	
 	@Override 
@@ -75,6 +74,7 @@ public class CHObject extends JPanel
 		Stroke oldStroke = g2.getStroke();
 		g2.setStroke(new BasicStroke(thickness));
 		
+		g.setColor(Color.white);
 		g.drawRect(0,0,r.width,r.height);
 		g2.setStroke(oldStroke);
 	}

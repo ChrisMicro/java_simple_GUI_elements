@@ -51,10 +51,11 @@ public class CHGraph extends CHObject
 		xMax=daten.length;		
 		scalex=(xDimension-yAchsePos)/(xMax-xMin);
 		
-		width=xDimension;
-		heigth=yDimension;
-		super.setBounds(next_xPosition,next_yPosition,width,heigth);
-		next_yPosition+=heigth;
+		
+
+		//setSize(xDimension,yDimension);
+		super.setBounds(next_xPosition,next_yPosition,xDimension,yDimension);
+		//next_yPosition+=heigth;
 		clearChart();
 	}
 	

@@ -31,7 +31,7 @@ public class ValueExample
 		CHValue value4=new CHValue("brains","superb");
 		fenster.add(value4);
 		
-		CHValue value5=new CHValue("color","brown");
+		CHValue value5=new CHValue("super cool color rabbit","brown");
 		fenster.add(value5);
 		
 		fenster.pack();

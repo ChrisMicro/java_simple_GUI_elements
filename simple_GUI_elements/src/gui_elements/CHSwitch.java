@@ -32,10 +32,10 @@ public class CHSwitch extends CHObject implements ActionListener
 		super.add(button2);
 		Dimension d=super.getPreferredSize();
 		
-		width=d.width;
-		heigth=d.height+5;
-		super.setBounds(next_xPosition,next_yPosition,width,heigth);
-		next_yPosition+=heigth;
+		//width=d.width;
+		//heigth=d.height+5;
+		super.setBounds(next_xPosition,next_yPosition,d.width,d.height+5);
+		//next_yPosition+=heigth;
 	}
 	
 	public CHSwitch(String name)

@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -22,11 +23,12 @@ public class CHSlider extends CHObject
 	int sliderValue;
 	
 	int textHeigth=20;
-	int labelWidth=80;
+	int labelWidth=100;
 	int sliderWidth=160;
 	int textFieldWidth=60;
-//	int width=300;
-//	int heigth=50;
+
+	int defalutHeight=50;
+	int borderDistance=3;
 
 	public CHSlider(String label, int value, int min, int max)
 	{
@@ -40,9 +42,9 @@ public class CHSlider extends CHObject
 
 		Dimension d=labelText.getPreferredSize();
 		labelWidth=d.width;
-		labelText.setBounds(0,5,labelWidth,textHeigth);
-		width=labelWidth+sliderWidth+textFieldWidth;
-		//labelText.setBounds(0,5,d.width,textHeigth);
+		labelText.setBounds(borderDistance,2*borderDistance,labelWidth,textHeigth);
+		int width;
+		width=labelWidth+sliderWidth+textFieldWidth+2*borderDistance;
 		super.add(labelText);
 		
 		sliderValue=value;
@@ -65,17 +67,20 @@ public class CHSlider extends CHObject
  		meinSlider.setPaintLabels(true);
  		meinSlider.setValue(value);
  		meinSlider.addChangeListener(new SliderListener());
- 		meinSlider.setBounds(labelWidth,0,sliderWidth,heigth);
+ 		meinSlider.setBounds(labelWidth,1,sliderWidth,defalutHeight);
  		super.add(meinSlider);
  		
 		valueText=new JTextField(""+value);
 		valueText.setHorizontalAlignment(SwingConstants.CENTER);
-		valueText.setBounds(labelWidth+sliderWidth,0,textFieldWidth,textHeigth);
+		valueText.setBounds(labelWidth+sliderWidth,2*borderDistance,textFieldWidth,textHeigth);
 		super.add(valueText);
 		valueText.setCaretColor(Color.WHITE);
-			
-		super.setBounds(next_xPosition,next_yPosition,width,heigth);
-		next_yPosition+=heigth;
+		
+		Point p=this.getLocation();
+		super.setBounds(p.x,p.y,width,defalutHeight+2);
+		//super.setBounds(next_xPosition,next_yPosition+2,width,defalutHeight+2);
+		
+		//next_yPosition+=heigth;
 	}
 	public CHSlider(String label, int value)
 	{
