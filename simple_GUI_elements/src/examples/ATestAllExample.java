@@ -2,6 +2,7 @@ package examples;
 
 import gui_elements.CHBox;
 import gui_elements.CHGraph;
+import gui_elements.CHRectangleBorder;
 import gui_elements.CHSlider;
 import gui_elements.CHSwitch;
 import gui_elements.CHValue;
@@ -79,6 +80,10 @@ public class ATestAllExample
 		
 		CHSlider rateSlider=new CHSlider("rate [ms]",100,0,100);
 		window.add(rateSlider);
+		
+		CHRectangleBorder border=new CHRectangleBorder("border1");
+		border.setBounds(0,0,620,420);
+		window.add(border);
 		
 		window.pack();
 		window.setVisible(true);

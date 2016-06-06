@@ -1,15 +1,8 @@
 package gui_elements;
-
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Point;
-
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -18,12 +11,12 @@ import javax.swing.event.ChangeListener;
 
 public class CHSlider extends CHObject
 {
-
 	JTextField valueText;
 	int sliderValue;
 	
 	int textHeigth=20;
 	int labelWidth=100;
+	int lableWidthDistanceToSlider=5;
 	int sliderWidth=160;
 	int textFieldWidth=60;
 
@@ -33,15 +26,13 @@ public class CHSlider extends CHObject
 	public CHSlider(String label, int value, int min, int max)
 	{
 		super(label);
-		
-		//super.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+
 		super.setLayout(null);
 
-		//labelText=new JLabel(label,SwingConstants.RIGHT);
 		labelText=new JLabel(label,SwingConstants.CENTER);
 
 		Dimension d=labelText.getPreferredSize();
-		labelWidth=d.width;
+		labelWidth=d.width+lableWidthDistanceToSlider;
 		labelText.setBounds(borderDistance,2*borderDistance,labelWidth,textHeigth);
 		int width;
 		width=labelWidth+sliderWidth+textFieldWidth+2*borderDistance;
@@ -78,9 +69,7 @@ public class CHSlider extends CHObject
 		
 		Point p=this.getLocation();
 		super.setBounds(p.x,p.y,width,defalutHeight+2);
-		//super.setBounds(next_xPosition,next_yPosition+2,width,defalutHeight+2);
-		
-		//next_yPosition+=heigth;
+
 	}
 	public CHSlider(String label, int value)
 	{

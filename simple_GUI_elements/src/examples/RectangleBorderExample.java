@@ -1,10 +1,10 @@
 package examples;
 
-import gui_elements.CHBox;
+import gui_elements.CHRectangleBorder;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
-public class BoxExample 
+public class RectangleBorderExample 
 {
 
 	public static void main(String[] args) 
@@ -16,21 +16,21 @@ public class BoxExample
 
 	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		CHBox value1=new CHBox("title name");
+		CHRectangleBorder value1=new CHRectangleBorder("border1");
 		window.add(value1);
 		
-		CHBox value2=new CHBox("box2");
+		CHRectangleBorder value2=new CHRectangleBorder("border2");
 		window.add(value2);
 		value2.setPosition(100, 100);
 
 		
-		CHBox value3=new CHBox("large box");
+		CHRectangleBorder value3=new CHRectangleBorder("border3");
 		window.add(value3);
 		//value3.setTextSize(25);
 
 		value3.setBounds(100, 200,500,100);
 		
-		CHBox value4=new CHBox("small box");
+		CHRectangleBorder value4=new CHRectangleBorder("border4");
 		window.add(value4);
 		//value3.setTextSize(25);
 
