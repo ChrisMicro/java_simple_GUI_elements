@@ -1,5 +1,6 @@
 package examples;
 
+import gui_elements.CHBox;
 import gui_elements.CHGraph;
 import gui_elements.CHSlider;
 import gui_elements.CHSwitch;
@@ -29,7 +30,7 @@ public class ATestAllExample
 	
 	public ATestAllExample()
 	{
-		window=new JFrame("slider example");
+		window=new JFrame("test all example");
 	    window.setPreferredSize(new Dimension(640, 480));
 	    window.getContentPane().setLayout(null);
 
@@ -55,9 +56,13 @@ public class ATestAllExample
 		 * setup
 		 * 
 		 ***************************************************************/
+		CHBox titleBox=new CHBox("java simple gui elements");
+		titleBox.setWidth(600);
+		window.add(titleBox);
+		
 		CHValue value1=new CHValue("example","all");
 		window.add(value1);
-		value1.setPosition(10, 10);
+		//value1.setPosition(10, 10);
 	
 		CHSwitch switch1=new CHSwitch("switch1");
 		window.add(switch1);
@@ -68,7 +73,7 @@ public class ATestAllExample
 		CHGraph graph1=new CHGraph("simple graph",daten);
 		graph1.setMinMaxY(-1.5, 1.5);
 
-		graph1.setPosition(200, 10);
+		graph1.setPosition(200, 60);
 		
 		window.add(graph1);
 		

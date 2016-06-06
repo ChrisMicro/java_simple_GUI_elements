@@ -48,7 +48,6 @@ public class CHObject extends JPanel
 	public void setPosition(int x, int y)
 	{
 		this.setBounds(x, y, this.getWidth(),this.getHeight());
-
 	}
 	
 	@Override 
@@ -64,8 +63,7 @@ public class CHObject extends JPanel
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g); // original paintComponent aus JPanel aufrufen
-		//Dimension d=this.getSize();
-		//Point p=this.getLocation();
+
 		Rectangle r=this.getBounds();
 	
 		int thickness = 2;
