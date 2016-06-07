@@ -117,6 +117,11 @@ public class RingBuffer
 	{
 	 return fillSize;
 	}
+
+	public double getBufferSize() 
+	{
+		return bufferSize;
+	}
 }
 
 /* simple_GUI_elements
