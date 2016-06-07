@@ -6,6 +6,8 @@ import javax.swing.SwingUtilities;
 
 public class CHGraph extends CHObject 
 {
+	public boolean autoScaleY=true;
+	GraphScale graphScale;
 	private int xAchsePos;
 	private int yAchsePos;
 	private int xDimension=400;
@@ -37,6 +39,8 @@ public class CHGraph extends CHObject
 		super(graphName);
 		this.add(labelText);
 		
+		graphScale = new GraphScale();
+		
 		//daten=new double[dataSize];
 		daten=new double[0];
 		xAchsePos=yDimension/2;
@@ -50,12 +54,14 @@ public class CHGraph extends CHObject
 		
 		xMax=daten.length;		
 		scalex=(xDimension-yAchsePos)/(xMax-xMin);
-		
-		
-
-		//setSize(xDimension,yDimension);
+		if(autoScaleY)
+		{
+			scaley=graphScale.getAutoScale(daten, xAchsePos, yDimension-xAchsePos);
+			yMin=graphScale.getMin();
+			yMax=graphScale.getMax();
+		}
 		super.setBounds(next_xPosition,next_yPosition,xDimension,yDimension);
-		//next_yPosition+=heigth;
+
 		clearChart();
 	}
 	
@@ -74,6 +80,12 @@ public class CHGraph extends CHObject
 		dataSize=daten.length;
 		xMax=dataSize;		
 		scalex=(xDimension-yAchsePos)/(xMax-xMin);
+		if(autoScaleY)
+		{
+			scaley=graphScale.getAutoScale(daten, xAchsePos, yDimension-xAchsePos);
+			yMin=graphScale.getMin();
+			yMax=graphScale.getMax();
+		}
 	}
 	
 	public void setData(double[] data)
@@ -84,6 +96,7 @@ public class CHGraph extends CHObject
 		dataSize=daten.length;
 		xMax=dataSize;		
 		scalex=(xDimension-yAchsePos)/(xMax-xMin);
+		if(autoScaleY) scaley=graphScale.getAutoScale(data, xAchsePos, yDimension-xAchsePos);
 		repaint();
 	}
 	
@@ -95,6 +108,7 @@ public class CHGraph extends CHObject
 		dataSize=daten.length;
 		xMax=dataSize;		
 		scalex=(xDimension-yAchsePos)/(xMax-xMin);
+		if(autoScaleY) scaley=graphScale.getAutoScale(daten, xAchsePos, yDimension-xAchsePos);
 		repaint();
 	}
 	
@@ -137,13 +151,20 @@ public class CHGraph extends CHObject
 		return result;
 	}
 	
+	protected void showAxisY(Graphics g)
+	{
+		// Beschriftung
+		g.drawString(""+graphScale.getMin(),yAchsePos-30,calcPosY(graphScale.getMin()));
+		g.drawString(""+graphScale.getMax(),yAchsePos-30,calcPosY(graphScale.getMax()));
+	}
+	
 	@Override 
 	protected void paintComponent(Graphics g)
 	{
 		super.paintComponent(g); // original paintComponent aus JPanel aufrufen
 		g.setColor(Color.blue);
 		dataSize=buffer.fillSize;
-		if(dataSize>1)
+		if(dataSize>1) // draw a graph
 		{	
 			for(int n=0;n<(dataSize-1);n++)
 			{
@@ -155,7 +176,7 @@ public class CHGraph extends CHObject
 				g.drawLine(p1x,p1y,p2x,p2y);
 			}
 		}
-		if(dataSize==1)
+		if(dataSize==1) // draw only a point
 		{
 			int p1x=calcPosX(0);
 			int p1y=calcPosY(buffer.ringBufGetValue(0));
@@ -163,17 +184,13 @@ public class CHGraph extends CHObject
 			g.drawRect(p1x-PointSize/2, p1y-PointSize/2, PointSize, PointSize);
 		}
 
-
-
 		// draw axis
 		g.setColor(Color.gray);
-		g.drawLine(0,xAchsePos,xDimension,xAchsePos);
-		g.drawLine(yAchsePos,0,yAchsePos,yDimension);
+		g.drawLine(0,xAchsePos,xDimension,xAchsePos); // |
+		g.drawLine(yAchsePos,0,yAchsePos,yDimension); // -
+		
+		showAxisY(g);
 
-		// Beschriftung
-		//g.drawString(""+y, xDimension/2, 10 );
-
-		//g.drawString(""+y, 0, xAchsePos);
 	}
 }
 /* simple_GUI_elements
