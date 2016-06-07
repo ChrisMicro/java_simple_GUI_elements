@@ -23,32 +23,43 @@ public class Curve extends JPanel
 	
 	public Curve()
 	{
-		curveColor=Color.red;
+		curveColor=Color.blue;
 		int dataSize=100;
 		
-
-		setDrawPanelDimension(new Dimension(100,100));
 		/*
 		double[] daten=new double[dataSize];
 		for(int n=0;n<dataSize;n++)daten[n]=Math.sin((double)n/5);
 
 		buffer=new RingBuffer(daten);*/
 		buffer=new RingBuffer(100);
+		xScale=new GraphScale();
+		yScale=new GraphScale();
+
+		setDimension(new Dimension(100,100));
+		setScale_y(-1.5,1.5);
+		xScale.setLimits(0, 100, drawPanelDimension.getWidth());
 	}
 	
-	public void setDrawPanelDimension(Dimension d)
+	public void setDimension(Dimension d)
 	{
 		drawPanelDimension=d;
-		xScale=new GraphScale();
-		xScale.setLimits(0, 100, drawPanelDimension.getWidth());
-		
-		yScale=new GraphScale();
-		yScale.setLimits(-1.5, 1.5, drawPanelDimension.getHeight());
+		//setScale_x(0, d.getWidth());
 	}
 	
-	public void setDrawPanelDimension(int x, int y)
+	public void setScale_x(double min, double max)
 	{
-		setDrawPanelDimension(new Dimension(x,y));
+		xScale.setLimits(min, max, drawPanelDimension.getWidth());
+	}
+	
+	public void setScale_y(double min, double max)
+	{
+		yScale.setLimits(min, max, drawPanelDimension.getHeight());	
+	}
+	
+	public void setDimension(int x, int y)
+	{
+		setDimension(new Dimension(x,y));
+		repaint();
 	}
 	
 	public void addValue(double value)
@@ -110,6 +121,10 @@ public class Curve extends JPanel
 
 			g.drawRect(p1x-PointSize/2, p1y-PointSize/2, PointSize, PointSize);
 		}
+		// x-axis
+		g.setColor(Color.LIGHT_GRAY);
+		g.drawLine(0, calcPosY(0), drawPanelDimension.width, calcPosY(0));
+		//g.drawRect(0, 0, drawPanelDimension.width, drawPanelDimension.height);
 
 	}
 	
@@ -131,6 +146,8 @@ public class Curve extends JPanel
 	
 
 		fenster.add(curve);
+		
+		curve.setDimension(200,100);
 
 		
 		fenster.pack();

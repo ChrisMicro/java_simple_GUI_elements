@@ -25,7 +25,8 @@ public class CHObject extends JPanel
 	int defaultHeight = 25;
 	
 	int LayoutManagerLineDistance=5;
-	
+
+	boolean showFrame=false;
 	public CHObject(String name)
 	{
 		labelText=new JLabel(name);
@@ -67,7 +68,7 @@ public class CHObject extends JPanel
 		g2.setStroke(new BasicStroke(thickness));
 		
 		g.setColor(Color.white);
-		g.drawRect(0,0,r.width,r.height);
+		if(showFrame) g.drawRect(0,0,r.width,r.height);
 		g2.setStroke(oldStroke);
 	}
 	

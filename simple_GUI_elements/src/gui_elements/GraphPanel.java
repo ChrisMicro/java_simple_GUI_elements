@@ -27,25 +27,31 @@ public class GraphPanel extends CHObject
 	
 	double xMin=0;
 	double xMax=10;
-	double yMin=0;
-	double yMax=10;
+	double yMin=-2;
+	double yMax=3;
 	
 	String xLabel;
 	String yLabel;
 	
-	JPanel drawing;
+	Curve drawing;
 	CHLabeledValue title;
+	
+	//Curve curve1;
 	
 	public GraphPanel(String titleText)
 	{
 		super(titleText);
-		//CHValue title=new CHValue("titleText", "");
-		//this.add(title);
-		
-		//this.setBackground(Color.LIGHT_GRAY);
-		super.setBounds(next_xPosition,next_yPosition,xDimension,yDimension);
-		JPanel drawing=new JPanel();
 		this.setLayout(null);
+		
+		super.setBounds(next_xPosition,next_yPosition,xDimension,yDimension);
+		//JPanel drawing=new JPanel();
+
+		drawing=new Curve();
+		//drawing.setScale_y(yMin, yMax);
+		//drawing.setScale_x(xMin, xMax);
+		//drawing.setDimension(400,100);
+		//drawing.setDimension(400,100);
+		//drawing.add(curve1);
 		
 		CHObject titleFrame=new CHObject(titleText);
 		this.add(titleFrame);
@@ -61,6 +67,17 @@ public class GraphPanel extends CHObject
 		int drawingHeight=yDimension-drawingLowerBorderHeight-drawingUpperBorderHeight;
 		
 		drawing.setBounds(drawingLeftBorderWidth, drawingUpperBorderHeight, drawingWidth, drawingHeight);
+		drawing.setDimension(drawingWidth,drawingHeight);
+		drawing.setScale_y(yMin, yMax);
+		//drawing.setScale_x(xMin, xMax);
+		
+		int dataSize=400;
+		for(int n=0;n<dataSize;n++)
+		{
+			drawing.addValue(Math.sin((double)n/5));
+
+		}
+		
 		xLabel="time";
 		yLabel="amplitude";
 		showAxis_x();
@@ -136,10 +153,10 @@ public class GraphPanel extends CHObject
 	    GraphPanel graphTitle=new GraphPanel("chart title");
 		fenster.add(graphTitle);
 	
-	    GraphPanel graph2=new GraphPanel("chart title");
-		fenster.add(graph2);
+	    //GraphPanel graph2=new GraphPanel("chart title");
+		//fenster.add(graph2);
 		
-		graph2.setPosition(100, 300);
+		//graph2.setPosition(100, 300);
 		
 		fenster.pack();
 		fenster.setVisible(true);
