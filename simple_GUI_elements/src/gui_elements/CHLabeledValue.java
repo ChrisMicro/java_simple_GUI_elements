@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -17,17 +16,22 @@ import javax.swing.SwingConstants;
  * labelWidth textFieldWidth
  */
 
-public class CHValue extends CHObject
+public class CHLabeledValue extends CHObject
 {
 	JTextField valueText;
 	
-	//int textHeigth     = 20;
-	//int heigth         = 30;
+	int textHeigth     = 20;
+	int heigth         = 30;
+	int labelWidth     = 80;
 	int textFieldWidth = 60;
 	
-	public CHValue(String label, String value)
+	public CHLabeledValue(String label, String value)
 	{
 		super(label);
+
+		labelText=new JLabel(label);
+		Dimension d=labelText.getPreferredSize();
+		super.add(labelText,"West");
 
 		valueText=new JTextField(value);
 		// turn off cursor
@@ -36,21 +40,22 @@ public class CHValue extends CHObject
 
 		super.add(valueText,"East");
 
+
+		if(d.width>labelWidth) labelWidth=d.width+10;
+		
 		Dimension d1=valueText.getPreferredSize();
 		
 		if(d1.width>textFieldWidth) textFieldWidth=d1.width;
 
-		valueText.setPreferredSize( new Dimension( textFieldWidth, d1.height ) );
+		valueText.setPreferredSize( new Dimension( textFieldWidth, textHeigth ) );
 		
-		int width=textFieldWidth;
+		int width=labelWidth+textFieldWidth;
 		
 		Point p=this.getLocation();
-		//this.setBounds(0,0,width,d1.height);
-		super.setBounds(0,0,width,d1.height+5);
-
+		this.setBounds(p.x,p.y,width,heigth);
 	}
 	
-	public CHValue(String label, int value)
+	public CHLabeledValue(String label, int value)
 	{
 		this(label, ""+value);
 	}
@@ -67,28 +72,7 @@ public class CHValue extends CHObject
 	}
 	public void setValue(double value)
 	{
-		if(value==0)valueText.setText("0");
-		else		valueText.setText(String.format("%.2f", value));
-	}
-	
-	public static void main(String[] args) 
-	{
-		JFrame fenster;
-		fenster=new JFrame("value example");
-	    fenster.setPreferredSize(new Dimension(640, 480));
-	    fenster.getContentPane().setLayout(null);
-
-	    fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		CHValue value1=new CHValue("name","rabbit");
-		fenster.add(value1);
-	
-
-		fenster.add(value1);
-		
-		fenster.pack();
-		fenster.setVisible(true);
-		
+		valueText.setText(String.format("%.2f", value));
 	}
 }
 /* simple_GUI_elements

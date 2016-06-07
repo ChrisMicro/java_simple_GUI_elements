@@ -5,7 +5,7 @@ import gui_elements.CHGraph;
 import gui_elements.CHRectangleBorder;
 import gui_elements.CHSlider;
 import gui_elements.CHSwitch;
-import gui_elements.CHValue;
+import gui_elements.CHLabeledValue;
 
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
@@ -61,7 +61,7 @@ public class ATestAllExample
 		titleBox.setWidth(600);
 		window.add(titleBox);
 		
-		CHValue value1=new CHValue("example","all");
+		CHLabeledValue value1=new CHLabeledValue("example","all");
 		window.add(value1);
 		//value1.setPosition(10, 10);
 	

@@ -1,7 +1,7 @@
 package examples;
 
 import gui_elements.CHGraph;
-import gui_elements.CHValue;
+import gui_elements.CHLabeledValue;
 
 import java.awt.Dimension;
 

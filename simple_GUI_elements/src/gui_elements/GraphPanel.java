@@ -2,54 +2,107 @@ package gui_elements;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Point;
+
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+
 
 public class GraphPanel extends CHObject
 {
 	JTextField valueText;
 
-	private int xDimension=400;
-	private int yDimension=250;
+	private int xDimension=300;
+	private int yDimension=200;
+	
+	int titleHeight=25;
+	int drawingLeftBorderWidth=80;
+	int drawingRightBorderWidth=50;
+	int drawingUpperBorderHeight=titleHeight;
+	int drawingLowerBorderHeight=25;
+
+	int drawingWidth;
+	
+	double xMin=0;
+	double xMax=10;
+	double yMin=0;
+	double yMax=10;
+	
+	String xLabel;
+	String yLabel;
 	
 	JPanel drawing;
-	CHValue title;
+	CHLabeledValue title;
 	
-	public GraphPanel(String label)
+	public GraphPanel(String titleText)
 	{
-		super(label);
-		CHValue title=new CHValue("hallo test hallo", "geth nicht so schnell");
-		this.add(title);
+		super(titleText);
+		//CHValue title=new CHValue("titleText", "");
+		//this.add(title);
 		super.setBounds(next_xPosition,next_yPosition,xDimension,yDimension);
 		JPanel drawing=new JPanel();
 		this.setLayout(null);
-		/*
+		
+		CHObject titleFrame=new CHObject(titleText);
+		this.add(titleFrame);
+		JLabel text=new JLabel(titleText);
+		titleFrame.add(text);
+		int titleWidth=xDimension-drawingLeftBorderWidth-drawingRightBorderWidth;
+		titleFrame.setBounds(drawingLeftBorderWidth,0,titleWidth,titleHeight);
+		
 		this.add(drawing);
-		drawing.setBackground(Color.CYAN);
+		drawing.setBackground(Color.LIGHT_GRAY);
 		
-		drawing.setBounds(10, 10, 100, 100);
-		*/
+		drawingWidth=xDimension-drawingLeftBorderWidth-drawingRightBorderWidth;
+		int drawingHeight=yDimension-drawingLowerBorderHeight-drawingUpperBorderHeight;
 		
-/*
-		valueText=new JTextField(value);
-		valueText.setCaretColor(Color.WHITE);
-		valueText.setHorizontalAlignment(SwingConstants.CENTER);
-		valueText.setPreferredSize( new Dimension( textFieldWidth, textHeigth ) );
-		super.add(valueText,"East");
-
-
-		if(d.width>labelWidth) labelWidth=d.width+10;
-
-		int width=labelWidth+textFieldWidth;
+		drawing.setBounds(drawingLeftBorderWidth, drawingUpperBorderHeight, drawingWidth, drawingHeight);
 		
-		Point p=this.getLocation();
-		super.setBounds(p.x,p.y,width,heigth);
-		*/
+		showAxis_x();
+		showAxis_y();
+		
+	}
+	
+	public void showAxis_x()
+	{
+		//************** X-Axis *************************
+		CHValue xMinLabel=new CHValue("xMin","-");
+		this.add(xMinLabel);
+		xMinLabel.setValue(xMin);
+		
+		int yPos=yDimension-drawingLowerBorderHeight;
+		xMinLabel.setPosition(drawingLeftBorderWidth, yPos);
+		
+		CHValue xMaxLabel=new CHValue("xMax","-");
+		this.add(xMaxLabel);
+		xMaxLabel.setValue(xMax);
+		
+		int xPos=xDimension-drawingRightBorderWidth;
+		xMaxLabel.setPosition(xPos, yPos);
+	}
+	
+	public void showAxis_y()
+	{
+		//************** Y-Axis *************************
+		int xPos=0;
+		
+		CHValue yMaxLabel=new CHValue("yMax","yMax");
+		this.add(yMaxLabel);
+		yMaxLabel.setValue(yMax);
+		
+		int textHeigth=yMaxLabel.getHeight();
+		
+		yMaxLabel.setPosition(xPos, drawingUpperBorderHeight-textHeigth/2);
+		
+		CHValue yMinLabel=new CHValue("yMin","yMin");
+		this.add(yMinLabel);
+		yMinLabel.setValue(yMin);
+		
+		int yPos=yDimension-drawingLowerBorderHeight-textHeigth/2;
+		
+		yMinLabel.setPosition(xPos, yPos);
 	}
 	
 	public static void main(String[] args) 
@@ -61,11 +114,9 @@ public class GraphPanel extends CHObject
 
 	    fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	    GraphPanel graphTitle=new GraphPanel("graph title");
+	    GraphPanel graphTitle=new GraphPanel("chart title");
 		fenster.add(graphTitle);
 	
-
-		
 		fenster.pack();
 		fenster.setVisible(true);
 		

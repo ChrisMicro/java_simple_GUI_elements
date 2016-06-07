@@ -1,6 +1,6 @@
 package examples;
 
-import gui_elements.CHValue;
+import gui_elements.CHLabeledValue;
 
 import java.awt.Dimension;
 
@@ -18,20 +18,20 @@ public class ValueExample
 
 	    fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		CHValue value1=new CHValue("name","rabbit");
+		CHLabeledValue value1=new CHLabeledValue("name","rabbit");
 		fenster.add(value1);
 	
-		CHValue value2=new CHValue("weight","2 Kg");
+		CHLabeledValue value2=new CHLabeledValue("weight","2 Kg");
 		fenster.add(value2);
 
-		CHValue value3=new CHValue("speed","40 km/h");
+		CHLabeledValue value3=new CHLabeledValue("speed","40 km/h");
 		fenster.add(value3);
 		value3.setPosition(200, 200);
 		
-		CHValue value4=new CHValue("brains","superb");
+		CHLabeledValue value4=new CHLabeledValue("brains","superb");
 		fenster.add(value4);
 		
-		CHValue value5=new CHValue("super cool color rabbit","brown");
+		CHLabeledValue value5=new CHLabeledValue("super cool color rabbit","brown");
 		fenster.add(value5);
 		
 		fenster.pack();
