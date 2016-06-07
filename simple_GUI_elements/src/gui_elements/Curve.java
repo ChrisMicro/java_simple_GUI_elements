@@ -8,23 +8,31 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public class Curve extends JPanel
+public class Curve 
 {
 	Color curveColor;
 	int PointSize=3;
-	boolean showPoints=true;
+	boolean showPoints=false;
 	
 	Dimension drawPanelDimension;
 	
 	RingBuffer buffer;
 	GraphScale xScale;
 	GraphScale yScale;
-
+	
+	Color [] colorArray={Color.BLUE,Color.RED,Color.green,Color.YELLOW};
+	static int defaultColorIndex=0;
+	
+	public void setVisibleLinePoints(boolean showPoints)
+	{
+		this.showPoints=showPoints;
+	}
 	
 	public Curve()
 	{
-		curveColor=Color.blue;
-		int dataSize=100;
+		curveColor=colorArray[defaultColorIndex++];
+		if(defaultColorIndex>=colorArray.length)defaultColorIndex=0;
+
 		
 		/*
 		double[] daten=new double[dataSize];
@@ -43,7 +51,8 @@ public class Curve extends JPanel
 	public void setDimension(Dimension d)
 	{
 		drawPanelDimension=d;
-		//setScale_x(0, d.getWidth());
+		xScale.setLimits(0, buffer.getBufferSize(), drawPanelDimension.getWidth());
+		yScale.setLimits(-1, 1, drawPanelDimension.getHeight());	
 	}
 	
 	public void setScale_x(double min, double max)
@@ -59,14 +68,14 @@ public class Curve extends JPanel
 	public void setDimension(int x, int y)
 	{
 		setDimension(new Dimension(x,y));
-		repaint();
+		//repaint();
 	}
 	
 	public void addValue(double value)
 	{
 		buffer.add(value);
 		xScale.setLimits(0, buffer.getFillSize(), drawPanelDimension.getWidth());
-		repaint();
+
 	}
 	
 	public int calcPosX(double x)
@@ -88,10 +97,9 @@ public class Curve extends JPanel
 		return result;
 	}
 	
-	@Override 
+
 	protected void paintComponent(Graphics g)
 	{
-		super.paintComponent(g); // original paintComponent aus JPanel aufrufen
 		g.setColor(curveColor);
 		int dataSize=buffer.getFillSize();
 		
@@ -141,11 +149,11 @@ public class Curve extends JPanel
 	    fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Curve curve=new Curve();
-		curve.setBounds(0,0,600,400);
+/*		curve.setBounds(0,0,600,400);
 		fenster.add(curve);
 	
 
-		fenster.add(curve);
+		fenster.add(curve);*/
 		
 		curve.setDimension(200,100);
 

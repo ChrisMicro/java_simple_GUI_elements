@@ -3,12 +3,9 @@ package gui_elements;
 import java.awt.Color;
 import java.awt.Dimension;
 
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 
 public class GraphPanel extends CHObject
 {
@@ -33,10 +30,43 @@ public class GraphPanel extends CHObject
 	String xLabel;
 	String yLabel;
 	
-	Curve drawing;
+	CurvePanel drawing;
 	CHLabeledValue title;
 	
-	//Curve curve1;
+	public GraphPanel(String titleText,Curve curve)
+	{
+		super(titleText);
+		this.setLayout(null);
+
+		super.setBounds(next_xPosition,next_yPosition,xDimension,yDimension);
+
+		drawing=new CurvePanel();
+
+
+		CHObject titleFrame=new CHObject(titleText);
+		this.add(titleFrame);
+		JLabel text=new JLabel(titleText);
+		titleFrame.add(text);
+
+		int titleWidth=xDimension-drawingLeftBorderWidth-drawingRightBorderWidth;
+		titleFrame.setBounds(drawingLeftBorderWidth,0,titleWidth,titleHeight);
+		
+		this.add(drawing);
+		//drawing.setBackground(Color.LIGHT_GRAY);
+		drawing.setBackground(Color.WHITE);
+		drawingWidth=xDimension-drawingLeftBorderWidth-drawingRightBorderWidth;
+		int drawingHeight=yDimension-drawingLowerBorderHeight-drawingUpperBorderHeight;
+		
+		drawing.setBounds(drawingLeftBorderWidth, drawingUpperBorderHeight, drawingWidth, drawingHeight);
+		
+		drawing.add(curve);
+		
+		xLabel="time";
+		yLabel="amplitude";
+		showAxis_x();
+		showAxis_y();
+
+	}
 	
 	public GraphPanel(String titleText)
 	{
@@ -46,7 +76,11 @@ public class GraphPanel extends CHObject
 		super.setBounds(next_xPosition,next_yPosition,xDimension,yDimension);
 		//JPanel drawing=new JPanel();
 
-		drawing=new Curve();
+		drawing=new CurvePanel();
+
+		//drawing.setBounds(0,0,240,300);
+		
+
 		//drawing.setScale_y(yMin, yMax);
 		//drawing.setScale_x(xMin, xMax);
 		//drawing.setDimension(400,100);
@@ -67,15 +101,20 @@ public class GraphPanel extends CHObject
 		int drawingHeight=yDimension-drawingLowerBorderHeight-drawingUpperBorderHeight;
 		
 		drawing.setBounds(drawingLeftBorderWidth, drawingUpperBorderHeight, drawingWidth, drawingHeight);
-		drawing.setDimension(drawingWidth,drawingHeight);
-		drawing.setScale_y(yMin, yMax);
+		
+		Curve curve=new Curve();
+		Curve curve1=new Curve();
+		drawing.add(curve);
+		drawing.add(curve1);
+		//drawing.setDimension(drawingWidth,drawingHeight);
+		//drawing.setScale_y(yMin, yMax);
 		//drawing.setScale_x(xMin, xMax);
 		
 		int dataSize=400;
 		for(int n=0;n<dataSize;n++)
 		{
-			drawing.addValue(Math.sin((double)n/5));
-
+			curve.addValue(Math.sin((double)n/5));
+			curve1.addValue(Math.cos((double)n/5));
 		}
 		
 		xLabel="time";
@@ -83,6 +122,18 @@ public class GraphPanel extends CHObject
 		showAxis_x();
 		showAxis_y();
 		
+	}
+	
+	public void set_xlabel(String xLabel)
+	{
+		this.xLabel=xLabel;
+		showAxis_x();
+	}
+	
+	public void set_ylabel(String yLabel)
+	{
+		this.yLabel=yLabel;
+		showAxis_y();
 	}
 	
 	public void showAxis_x()
@@ -153,13 +204,38 @@ public class GraphPanel extends CHObject
 	    GraphPanel graphTitle=new GraphPanel("chart title");
 		fenster.add(graphTitle);
 	
-	    //GraphPanel graph2=new GraphPanel("chart title");
-		//fenster.add(graph2);
+		Curve curve=new Curve();
+		curve.setVisibleLinePoints(true);
 		
-		//graph2.setPosition(100, 300);
+		
+	    GraphPanel graph2=new GraphPanel("rolling chart",curve);
+		fenster.add(graph2);
+		graph2.setPosition(10, 250);	
+		graph2.set_xlabel("time [s]");
+		graph2.set_ylabel("voltage [V]");
 		
 		fenster.pack();
 		fenster.setVisible(true);
+		
+		int dataSize=200;
+		for(int n=0;n<dataSize;n++)
+		{
+			curve.addValue(Math.sin((double)n/5));
+			//curve1.addValue(Math.cos((double)n/5));
+			//curve2.addValue(Math.sin((double)n/7));
+			//curve3.addValue(Math.cos((double)n/10));
+			graph2.repaint();
+			int t_ms=20;
+		    try 
+		    {
+		        Thread.sleep(t_ms);           
+		    } catch(InterruptedException ex) 
+		    {
+		        Thread.currentThread().interrupt();
+		    }
+		}
+		
+
 		
 	}
 

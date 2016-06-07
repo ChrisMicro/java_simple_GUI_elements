@@ -14,9 +14,9 @@ import javax.swing.JPanel;
 
 public class CurvePanel extends JPanel
 {
-	ArrayList<Curve1> curveList = new ArrayList<Curve1>(); 
+	ArrayList<Curve> curveList = new ArrayList<Curve>(); 
 	
-	public void add(Curve1 curve)
+	public void add(Curve curve)
 	{
 		Rectangle r=this.getBounds();
 		
@@ -50,10 +50,10 @@ public class CurvePanel extends JPanel
 		CurvePanel cPanel=new CurvePanel();
 		cPanel.setBounds(0,0,240,300);
 		
-		Curve1 curve=new Curve1();
-		Curve1 curve1=new Curve1();
-		Curve1 curve2=new Curve1();
-		Curve1 curve3=new Curve1();
+		Curve curve=new Curve();
+		Curve curve1=new Curve();
+		Curve curve2=new Curve();
+		Curve curve3=new Curve();
 		
 		cPanel.add(curve);
 		cPanel.add(curve1);
