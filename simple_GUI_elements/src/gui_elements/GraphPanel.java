@@ -14,14 +14,14 @@ public class GraphPanel extends CHObject
 {
 	JTextField valueText;
 
-	private int xDimension=300;
+	private int xDimension=400;
 	private int yDimension=200;
 	
 	int titleHeight=25;
-	int drawingLeftBorderWidth=80;
+	int drawingLeftBorderWidth=100;
 	int drawingRightBorderWidth=50;
 	int drawingUpperBorderHeight=titleHeight;
-	int drawingLowerBorderHeight=25;
+	int drawingLowerBorderHeight=30;
 
 	int drawingWidth;
 	
@@ -59,7 +59,8 @@ public class GraphPanel extends CHObject
 		int drawingHeight=yDimension-drawingLowerBorderHeight-drawingUpperBorderHeight;
 		
 		drawing.setBounds(drawingLeftBorderWidth, drawingUpperBorderHeight, drawingWidth, drawingHeight);
-		
+		xLabel="time";
+		yLabel="amplitude";
 		showAxis_x();
 		showAxis_y();
 		
@@ -73,14 +74,22 @@ public class GraphPanel extends CHObject
 		xMinLabel.setValue(xMin);
 		
 		int yPos=yDimension-drawingLowerBorderHeight;
-		xMinLabel.setPosition(drawingLeftBorderWidth, yPos);
+		xMinLabel.setPosition(drawingLeftBorderWidth-xMinLabel.getWidth()/2, yPos);
 		
 		CHValue xMaxLabel=new CHValue("xMax","-");
 		this.add(xMaxLabel);
 		xMaxLabel.setValue(xMax);
 		
-		int xPos=xDimension-drawingRightBorderWidth;
+		int xPos=xDimension-drawingRightBorderWidth-xMaxLabel.getWidth()/2;
 		xMaxLabel.setPosition(xPos, yPos);
+		
+		//************** xlabel text ******************************************
+		CHObject yAxisObj=new CHObject("xlabel");
+		this.add(yAxisObj);
+		JLabel text=new JLabel(xLabel);
+		yAxisObj.add(text);
+		int titleWidth=xDimension-drawingLeftBorderWidth-drawingRightBorderWidth;
+		yAxisObj.setBounds(drawingLeftBorderWidth,yPos,titleWidth,titleHeight);
 	}
 	
 	public void showAxis_y()
@@ -103,6 +112,14 @@ public class GraphPanel extends CHObject
 		int yPos=yDimension-drawingLowerBorderHeight-textHeigth/2;
 		
 		yMinLabel.setPosition(xPos, yPos);
+		
+		//************** ylabel text ******************************************
+		CHObject titleFrame=new CHObject("ylabel");
+		this.add(titleFrame);
+		JLabel text=new JLabel(yLabel);
+		titleFrame.add(text);
+		int titleWidth=drawingLeftBorderWidth;
+		titleFrame.setBounds(xPos,drawingUpperBorderHeight+(yDimension-drawingUpperBorderHeight)/2-textHeigth,titleWidth,titleHeight);
 	}
 	
 	public static void main(String[] args) 
