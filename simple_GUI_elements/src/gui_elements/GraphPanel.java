@@ -4,76 +4,73 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-/*
- * CHValue format
- * 
- * label      text
- * labelWidth textFieldWidth
- */
-
-public class CHValue extends CHObject
+public class GraphPanel extends CHObject
 {
 	JTextField valueText;
+
+	private int xDimension=400;
+	private int yDimension=250;
 	
-	int textHeigth     = 20;
-	int heigth         = 30;
-	int labelWidth     = 80;
-	int textFieldWidth = 60;
+	JPanel drawing;
+	CHValue title;
 	
-	public CHValue(String label, String value)
+	public GraphPanel(String label)
 	{
 		super(label);
-
-		labelText=new JLabel(label);
-		Dimension d=labelText.getPreferredSize();
-		super.add(labelText,"West");
-
+		CHValue title=new CHValue("hallo test hallo", "geth nicht so schnell");
+		this.add(title);
+		super.setBounds(next_xPosition,next_yPosition,xDimension,yDimension);
+		JPanel drawing=new JPanel();
+		this.setLayout(null);
+		/*
+		this.add(drawing);
+		drawing.setBackground(Color.CYAN);
+		
+		drawing.setBounds(10, 10, 100, 100);
+		*/
+		
+/*
 		valueText=new JTextField(value);
-		// turn off cursor
 		valueText.setCaretColor(Color.WHITE);
 		valueText.setHorizontalAlignment(SwingConstants.CENTER);
-
+		valueText.setPreferredSize( new Dimension( textFieldWidth, textHeigth ) );
 		super.add(valueText,"East");
 
 
 		if(d.width>labelWidth) labelWidth=d.width+10;
-		
-		Dimension d1=valueText.getPreferredSize();
-		
-		if(d1.width>textFieldWidth) textFieldWidth=d1.width;
 
-		valueText.setPreferredSize( new Dimension( textFieldWidth, textHeigth ) );
-		
 		int width=labelWidth+textFieldWidth;
 		
 		Point p=this.getLocation();
-		this.setBounds(p.x,p.y,width,heigth);
+		super.setBounds(p.x,p.y,width,heigth);
+		*/
 	}
 	
-	public CHValue(String label, int value)
+	public static void main(String[] args) 
 	{
-		this(label, ""+value);
-	}
+		JFrame fenster;
+		fenster=new JFrame("value example");
+	    fenster.setPreferredSize(new Dimension(640, 480));
+	    fenster.getContentPane().setLayout(null);
 
-	public void setValueText(String value)
-	{
-		valueText.setText(value);
-	}
+	    fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	    GraphPanel graphTitle=new GraphPanel("graph title");
+		fenster.add(graphTitle);
 	
-	public void setValue(float value)
-	{
-		valueText.setText(String.format("%.2f", value));
 
+		
+		fenster.pack();
+		fenster.setVisible(true);
+		
 	}
-	public void setValue(double value)
-	{
-		valueText.setText(String.format("%.2f", value));
-	}
+
 }
 /* simple_GUI_elements
  * © ChrisMicro 2016.
