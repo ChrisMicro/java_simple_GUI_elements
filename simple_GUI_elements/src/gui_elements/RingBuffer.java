@@ -31,7 +31,16 @@ public class RingBuffer
 		writePosition = 0;
 		fillSize      = 0;
 	}
-		
+	
+	public void add(double value)
+	{
+		ringBufferAdd(value);
+	}
+	public int getFillSize()
+	{
+		return fillSize;
+	}
+	
 	public void setData(double[] data)
 	{
 		this.data=data;

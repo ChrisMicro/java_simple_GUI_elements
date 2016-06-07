@@ -17,6 +17,11 @@ public class GraphScale
 		return max;
 	}
 	
+	public int getAxisWidthInPixel()
+	{
+		return (int)maxAxis;
+	}
+	
 	public double signedCeilPercent(double x, double percent)
 	{
 		double faktor=percent/100;
@@ -29,6 +34,14 @@ public class GraphScale
 		temp=temp*faktor;
 		temp=sign*temp;
 		return temp;
+	}
+	
+	public void setLimits(double min, double max, double axisWidthInPixel)
+	{
+		this.min=min;
+		this.max=max;
+		maxAxis=axisWidthInPixel;
+		scale= (maxAxis-axisStartPosition)/(max-min);
 	}
 	
 	public double getAutoScale(double []daten, double axisStartPosition, double axisWidth)

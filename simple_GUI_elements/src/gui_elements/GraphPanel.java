@@ -19,7 +19,7 @@ public class GraphPanel extends CHObject
 	
 	int titleHeight=25;
 	int drawingLeftBorderWidth=100;
-	int drawingRightBorderWidth=50;
+	int drawingRightBorderWidth=40;
 	int drawingUpperBorderHeight=titleHeight;
 	int drawingLowerBorderHeight=30;
 
@@ -41,6 +41,8 @@ public class GraphPanel extends CHObject
 		super(titleText);
 		//CHValue title=new CHValue("titleText", "");
 		//this.add(title);
+		
+		//this.setBackground(Color.LIGHT_GRAY);
 		super.setBounds(next_xPosition,next_yPosition,xDimension,yDimension);
 		JPanel drawing=new JPanel();
 		this.setLayout(null);
@@ -53,8 +55,8 @@ public class GraphPanel extends CHObject
 		titleFrame.setBounds(drawingLeftBorderWidth,0,titleWidth,titleHeight);
 		
 		this.add(drawing);
-		drawing.setBackground(Color.LIGHT_GRAY);
-		
+		//drawing.setBackground(Color.LIGHT_GRAY);
+		drawing.setBackground(Color.WHITE);
 		drawingWidth=xDimension-drawingLeftBorderWidth-drawingRightBorderWidth;
 		int drawingHeight=yDimension-drawingLowerBorderHeight-drawingUpperBorderHeight;
 		
@@ -134,6 +136,11 @@ public class GraphPanel extends CHObject
 	    GraphPanel graphTitle=new GraphPanel("chart title");
 		fenster.add(graphTitle);
 	
+	    GraphPanel graph2=new GraphPanel("chart title");
+		fenster.add(graph2);
+		
+		graph2.setPosition(100, 300);
+		
 		fenster.pack();
 		fenster.setVisible(true);
 		
