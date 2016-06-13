@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+
+
 
 /*
  * CHValue format
@@ -24,6 +27,7 @@ public class CHValue extends CHObject
 	//int textHeigth     = 20;
 	//int heigth         = 30;
 	int textFieldWidth = 60;
+	int defaultStyle=0;
 	
 	public CHValue(String label, String value)
 	{
@@ -31,8 +35,9 @@ public class CHValue extends CHObject
 
 		valueText=new JTextField(value);
 		// turn off cursor
-		valueText.setCaretColor(Color.WHITE);
-		valueText.setHorizontalAlignment(SwingConstants.CENTER);
+		//valueText.setCaretColor(Color.WHITE);
+		//valueText.setHorizontalAlignment(SwingConstants.CENTER);
+		setStyle(defaultStyle);
 
 		super.add(valueText,"East");
 
@@ -42,12 +47,29 @@ public class CHValue extends CHObject
 
 		valueText.setPreferredSize( new Dimension( textFieldWidth, d1.height ) );
 		
-		int width=textFieldWidth;
-		
+		int width=textFieldWidth;		
 		Point p=this.getLocation();
-		//this.setBounds(0,0,width,d1.height);
-		super.setBounds(0,0,width,d1.height+5);
-
+		this.setBounds(p.x,p.y,width,d1.height+4);
+	}
+	
+	public void setStyle(int style)
+	{
+		if(style==0)
+		{
+			valueText.setCaretColor(Color.WHITE);
+			//valueText.setBackground(Color.WHITE);
+			valueText.setHorizontalAlignment(SwingConstants.CENTER);
+		}
+		if(style==1)
+		{
+			valueText.setCaretColor(Color.WHITE);
+			valueText.setBackground(Color.LIGHT_GRAY);
+			valueText.setForeground(Color.BLUE);
+			valueText.setHorizontalAlignment(SwingConstants.CENTER);
+			//valueText.setBorder()
+			//Border b=valueText.getBorder();
+			
+		}
 	}
 	
 	public CHValue(String label, int value)
@@ -63,12 +85,25 @@ public class CHValue extends CHObject
 	public void setValue(float value)
 	{
 		valueText.setText(String.format("%.2f", value));
-
 	}
+	
 	public void setValue(double value)
 	{
 		if(value==0)valueText.setText("0");
 		else		valueText.setText(String.format("%.2f", value));
+	}
+	
+	public int getInt()
+	{
+		int k=0;
+		try
+		{
+			k=Integer.parseInt(valueText.getText());			
+		}catch(Exception e)
+		{
+			
+		}
+		return k;
 	}
 	
 	public static void main(String[] args) 
@@ -82,9 +117,10 @@ public class CHValue extends CHObject
 
 		CHValue value1=new CHValue("name","rabbit");
 		fenster.add(value1);
-	
 
-		fenster.add(value1);
+		CHValue value2=new CHValue("name","10m");
+		fenster.add(value2);
+		System.out.println(value2.getInt());
 		
 		fenster.pack();
 		fenster.setVisible(true);

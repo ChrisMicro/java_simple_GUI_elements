@@ -70,7 +70,7 @@ public class ATestAllExample
 		
 		int dataSize=500;
 		double[] daten=new double[dataSize];
-		for(int n=0;n<dataSize;n++)daten[n]=2+Math.sin((double)n/10);
+		for(int n=0;n<dataSize;n++)daten[n]=Math.sin((double)n/10);
 		CHGraph graph1=new CHGraph("simple graph",daten);
 		//graph1.setMinMaxY(-1.5, 1.5);
 

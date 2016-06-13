@@ -10,9 +10,9 @@ import javax.swing.JPanel;
 
 public class Curve 
 {
-	Color curveColor;
-	int PointSize=3;
-	boolean showPoints=false;
+	Color   curveColor;
+	int     PointSize  = 3;
+	boolean showPoints = false;
 	
 	Dimension drawPanelDimension;
 	
@@ -102,8 +102,6 @@ public class Curve
 	{
 		g.setColor(curveColor);
 		int dataSize=buffer.getFillSize();
-		
-
 		
 		if(dataSize>1) // draw a graph
 		{	

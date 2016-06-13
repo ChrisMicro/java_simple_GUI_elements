@@ -1,6 +1,7 @@
 package gui_elements;
 
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -34,7 +35,10 @@ public class CurvePanel extends JPanel
 		{
 			curveList.get(n).paintComponent(g);
 		}
-		//g.drawRect(0, 0, 100, 100);
+		
+		// draw a small frame
+		g.setColor(Color.DARK_GRAY);
+		g.drawRect(0, 0, this.getWidth()-1, this.getHeight()-1);
 
 	}
 	
