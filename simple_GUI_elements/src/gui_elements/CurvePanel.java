@@ -1,6 +1,7 @@
 package gui_elements;
 
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -25,6 +26,11 @@ public class CurvePanel extends JPanel
 		curveList.add(curve);
 	}
 	
+	public void removeCurves()
+	{
+		curveList = new ArrayList<Curve>();
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g)
 	{
@@ -34,7 +40,10 @@ public class CurvePanel extends JPanel
 		{
 			curveList.get(n).paintComponent(g);
 		}
-		//g.drawRect(0, 0, 100, 100);
+		
+		// draw a small frame
+		g.setColor(Color.DARK_GRAY);
+		g.drawRect(0, 0, this.getWidth()-1, this.getHeight()-1);
 
 	}
 	
@@ -64,6 +73,14 @@ public class CurvePanel extends JPanel
 		fenster.add(cPanel);
 		
 		//curve.setDimension(200,100);
+		
+		int sigLen=100;
+		double [] signal=new double[sigLen];
+		
+		for(int n=0;n<sigLen;n++)signal[n]= 10*Math.cos((double)n/10);
+		curve3.setScale_y(-15, 15);
+			
+		
 
 		
 		fenster.pack();
@@ -73,9 +90,10 @@ public class CurvePanel extends JPanel
 		for(int n=0;n<dataSize;n++)
 		{
 			curve.addValue(Math.sin((double)n/5));
-			curve1.addValue(Math.cos((double)n/5));
-			curve2.addValue(Math.sin((double)n/7));
-			curve3.addValue(Math.cos((double)n/10));
+			//curve1.addValue(Math.cos((double)n/5));
+			//curve2.addValue(Math.sin((double)n/7));
+			//curve3.addValue(Math.cos((double)n/10));
+			curve3.setData(signal);
 			cPanel.repaint();
 			int t_ms=20;
 		    try 

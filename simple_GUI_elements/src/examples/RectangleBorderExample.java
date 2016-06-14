@@ -10,7 +10,7 @@ public class RectangleBorderExample
 	public static void main(String[] args) 
 	{
 		JFrame window;
-		window=new JFrame("value example");
+		window=new JFrame("rectangle border example");
 	    window.setPreferredSize(new Dimension(640, 480));
 	    window.getContentPane().setLayout(null);
 

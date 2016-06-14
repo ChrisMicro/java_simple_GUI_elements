@@ -10,9 +10,9 @@ import javax.swing.JPanel;
 
 public class Curve 
 {
-	Color curveColor;
-	int PointSize=3;
-	boolean showPoints=false;
+	Color   curveColor;
+	int     PointSize  = 3;
+	boolean showPoints = false;
 	
 	Dimension drawPanelDimension;
 	
@@ -28,18 +28,12 @@ public class Curve
 		this.showPoints=showPoints;
 	}
 	
-	public Curve()
+	public Curve(int dataLength)
 	{
 		curveColor=colorArray[defaultColorIndex++];
 		if(defaultColorIndex>=colorArray.length)defaultColorIndex=0;
 
-		
-		/*
-		double[] daten=new double[dataSize];
-		for(int n=0;n<dataSize;n++)daten[n]=Math.sin((double)n/5);
-
-		buffer=new RingBuffer(daten);*/
-		buffer=new RingBuffer(100);
+		buffer=new RingBuffer(dataLength);
 		xScale=new GraphScale();
 		yScale=new GraphScale();
 
@@ -48,11 +42,31 @@ public class Curve
 		xScale.setLimits(0, 100, drawPanelDimension.getWidth());
 	}
 	
+	public Curve()
+	{
+		this(100);
+	}
+	
+	public void setData(double [] data)
+	{
+		buffer.setData(data);
+	}
+	
+	public void setData(int [] data)
+	{
+		buffer.setData(data);
+	}
+	
+	public void clear()
+	{
+		buffer.clear();
+	}
+	
 	public void setDimension(Dimension d)
 	{
 		drawPanelDimension=d;
 		xScale.setLimits(0, buffer.getBufferSize(), drawPanelDimension.getWidth());
-		yScale.setLimits(-1, 1, drawPanelDimension.getHeight());	
+		yScale.setLimits(-0.1, 1, drawPanelDimension.getHeight());	
 	}
 	
 	public void setScale_x(double min, double max)
@@ -102,8 +116,6 @@ public class Curve
 	{
 		g.setColor(curveColor);
 		int dataSize=buffer.getFillSize();
-		
-
 		
 		if(dataSize>1) // draw a graph
 		{	

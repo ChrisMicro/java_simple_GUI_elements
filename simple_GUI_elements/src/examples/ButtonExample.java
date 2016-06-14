@@ -1,39 +1,32 @@
 package examples;
 
-import gui_elements.CHGraph;
-import gui_elements.CHLabeledValue;
+import gui_elements.CHSlider;
+import gui_elements.CHButton;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-public class GraphExample 
+public class ButtonExample 
 {
 
 	public static void main(String[] args) 
 	{
 		JFrame fenster;
-		fenster=new JFrame("graph example");
-	    fenster.setPreferredSize(new Dimension(640, 480));
-	    fenster.getContentPane().setLayout(null);
-
-	    fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		//CHGraph value1=new CHGraph("signal");
-		//value1.setPosition(100, 10);
-		//fenster.add(value1);
+		fenster=new JFrame("switch example");
+		fenster.setPreferredSize(new Dimension(640, 480));
+		fenster.getContentPane().setLayout(null);
 		
-		int dataSize=500;
-		double[] daten=new double[dataSize];
-		for(int n=0;n<dataSize;n++)daten[n]=10*Math.sin((double)n/5);
-		CHGraph graph2=new CHGraph("HF signal",daten);
-		//graph2.setMinMaxY(-1.5, 1.5);
-
-		fenster.add(graph2);
-
+		fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		CHButton value1=new CHButton("run");
+		fenster.add(value1);
+		
+		CHButton sw2=new CHButton("bug button","kill");
+		fenster.add(sw2);
+		
 		fenster.pack();
 		fenster.setVisible(true);
-		
 	}
 }
 /* simple_GUI_elements

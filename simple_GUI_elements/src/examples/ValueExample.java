@@ -12,7 +12,7 @@ public class ValueExample
 	public static void main(String[] args) 
 	{
 		JFrame fenster;
-		fenster=new JFrame("value example");
+		fenster=new JFrame("labeled value example");
 	    fenster.setPreferredSize(new Dimension(640, 480));
 	    fenster.getContentPane().setLayout(null);
 
