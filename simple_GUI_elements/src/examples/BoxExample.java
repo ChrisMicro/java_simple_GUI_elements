@@ -10,7 +10,7 @@ public class BoxExample
 	public static void main(String[] args) 
 	{
 		JFrame window;
-		window=new JFrame("value example");
+		window=new JFrame("box example");
 	    window.setPreferredSize(new Dimension(640, 480));
 	    window.getContentPane().setLayout(null);
 

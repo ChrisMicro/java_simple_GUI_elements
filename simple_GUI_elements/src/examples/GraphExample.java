@@ -13,7 +13,7 @@ public class GraphExample
 	public static void main(String[] args) 
 	{
 		JFrame fenster;
-		fenster=new JFrame("value example");
+		fenster=new JFrame("graph example");
 	    fenster.setPreferredSize(new Dimension(640, 480));
 	    fenster.getContentPane().setLayout(null);
 
