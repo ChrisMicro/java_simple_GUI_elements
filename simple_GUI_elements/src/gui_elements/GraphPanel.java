@@ -12,7 +12,7 @@ public class GraphPanel extends CHObject
 	JTextField valueText;
 
 	private int xDimension=400;
-	private int yDimension=200;
+	private int yDimension=300;
 	
 	int titleHeight=25;
 	int drawingLeftBorderWidth=100;
@@ -25,8 +25,8 @@ public class GraphPanel extends CHObject
 	
 	double xMin =  0;
 	double xMax = 10;
-	double yMin = -2;
-	double yMax =  3;
+	double yMin = -1;
+	double yMax =  10;
 	
 	//String xLabel;
 	//String yLabel;
@@ -77,6 +77,16 @@ public class GraphPanel extends CHObject
 		//CHBox box=new CHBox("");
 		this.add(box);
 		box.setBounds(0, 0,this.getWidth(),this.getHeight());
+	}
+	
+	public void add(Curve curve)
+	{
+		drawing.add(curve);
+	}
+	
+	public void removeCurves()
+	{
+		drawing.removeCurves();
 	}
 	
 	public GraphPanel(String titleText)
