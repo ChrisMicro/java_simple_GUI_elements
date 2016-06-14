@@ -1,42 +1,32 @@
 package examples;
 
-import gui_elements.CHLabeledValue;
+import gui_elements.CHSlider;
+import gui_elements.CHButton;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-public class ValueExample 
+public class ButtonExample 
 {
 
 	public static void main(String[] args) 
 	{
 		JFrame fenster;
-		fenster=new JFrame("labeled value example");
-	    fenster.setPreferredSize(new Dimension(640, 480));
-	    fenster.getContentPane().setLayout(null);
-
-	    fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		CHLabeledValue value1=new CHLabeledValue("name","rabbit");
+		fenster=new JFrame("switch example");
+		fenster.setPreferredSize(new Dimension(640, 480));
+		fenster.getContentPane().setLayout(null);
+		
+		fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		CHButton value1=new CHButton("run");
 		fenster.add(value1);
-	
-		CHLabeledValue value2=new CHLabeledValue("weight","2 Kg");
-		fenster.add(value2);
-
-		CHLabeledValue value3=new CHLabeledValue("speed","40 km/h");
-		fenster.add(value3);
-		value3.setPosition(200, 200);
 		
-		CHLabeledValue value4=new CHLabeledValue("brains","superb");
-		fenster.add(value4);
-		
-		CHLabeledValue value5=new CHLabeledValue("super cool color rabbit","brown");
-		fenster.add(value5);
+		CHButton sw2=new CHButton("bug button","kill");
+		fenster.add(sw2);
 		
 		fenster.pack();
 		fenster.setVisible(true);
-		
 	}
 }
 /* simple_GUI_elements
