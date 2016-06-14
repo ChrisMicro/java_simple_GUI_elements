@@ -11,7 +11,7 @@ public class GraphPanel extends CHObject
 {
 	JTextField valueText;
 
-	private int xDimension=400;
+	private int xDimension=410;
 	private int yDimension=300;
 	
 	int titleHeight=25;
