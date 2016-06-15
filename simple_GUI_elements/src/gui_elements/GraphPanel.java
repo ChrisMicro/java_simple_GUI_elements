@@ -15,6 +15,8 @@ public class GraphPanel extends CHObject
 	private int yDimension=300;
 	
 	int titleHeight=25;
+	int titleWidth;
+	int drawingHeight;
 	int drawingLeftBorderWidth=100;
 	int drawingRightBorderWidth=40;
 	int drawingUpperBorderHeight=titleHeight;
@@ -34,7 +36,17 @@ public class GraphPanel extends CHObject
 	JLabel yLabel_;	
 	
 	CurvePanel drawing;
+	CHObject titleFrame;
 	CHLabeledValue title;
+	CHRectangleBorder box;
+	
+	private void setPositions()
+	{
+		titleWidth=xDimension-drawingLeftBorderWidth-drawingRightBorderWidth;
+
+		drawingWidth=xDimension-drawingLeftBorderWidth-drawingRightBorderWidth;
+		drawingHeight=yDimension-drawingLowerBorderHeight-drawingUpperBorderHeight-frameBorder;
+	}
 	
 	public GraphPanel(String titleText,Curve curve)
 	{
@@ -46,22 +58,19 @@ public class GraphPanel extends CHObject
 		xLabel_=new JLabel();
 		yLabel_=new JLabel();
 
-		drawing=new CurvePanel();
-
-		CHObject titleFrame=new CHObject(titleText);
+		titleFrame=new CHObject(titleText);
 		this.add(titleFrame);
+		
 		JLabel text=new JLabel(titleText);
 		titleFrame.add(text);
-
-		int titleWidth=xDimension-drawingLeftBorderWidth-drawingRightBorderWidth;
-		titleFrame.setBounds(drawingLeftBorderWidth,frameBorder,titleWidth,titleHeight);
 		
+		drawing=new CurvePanel();
 		this.add(drawing);
 		//drawing.setBackground(Color.LIGHT_GRAY);
 		drawing.setBackground(Color.WHITE);
-		drawingWidth=xDimension-drawingLeftBorderWidth-drawingRightBorderWidth;
-		int drawingHeight=yDimension-drawingLowerBorderHeight-drawingUpperBorderHeight-frameBorder;
-		
+
+		setPositions();
+		titleFrame.setBounds(drawingLeftBorderWidth,frameBorder,titleWidth,titleHeight);
 		drawing.setBounds(drawingLeftBorderWidth, drawingUpperBorderHeight+frameBorder, drawingWidth, drawingHeight);
 		
 		drawing.add(curve);
@@ -73,7 +82,7 @@ public class GraphPanel extends CHObject
 		showAxis_x();
 		showAxis_y();
 		
-		CHRectangleBorder box=new CHRectangleBorder("none");
+		box=new CHRectangleBorder("none");
 		//CHBox box=new CHBox("");
 		this.add(box);
 		box.setBounds(0, 0,this.getWidth(),this.getHeight());
@@ -88,71 +97,6 @@ public class GraphPanel extends CHObject
 	{
 		drawing.removeCurves();
 	}
-	
-	public GraphPanel(String titleText)
-	{
-		super(titleText);
-		this.setLayout(null);
-		
-		super.setBounds(next_xPosition,next_yPosition,xDimension,yDimension);
-		//JPanel drawing=new JPanel();
-		
-		xLabel_=new JLabel();
-		yLabel_=new JLabel();
-		
-		drawing=new CurvePanel();
-
-		//drawing.setBounds(0,0,240,300);
-		
-
-		//drawing.setScale_y(yMin, yMax);
-		//drawing.setScale_x(xMin, xMax);
-		//drawing.setDimension(400,100);
-		//drawing.setDimension(400,100);
-		//drawing.add(curve1);
-		
-		CHObject titleFrame=new CHObject(titleText);
-		this.add(titleFrame);
-		JLabel text=new JLabel(titleText);
-		titleFrame.add(text);
-		int titleWidth=xDimension-drawingLeftBorderWidth-drawingRightBorderWidth;
-		titleFrame.setBounds(drawingLeftBorderWidth,frameBorder,titleWidth,titleHeight);
-		
-		this.add(drawing);
-		//drawing.setBackground(Color.LIGHT_GRAY);
-		drawing.setBackground(Color.WHITE);
-		drawingWidth=xDimension-drawingLeftBorderWidth-drawingRightBorderWidth;
-		int drawingHeight=yDimension-drawingLowerBorderHeight-drawingUpperBorderHeight-frameBorder;
-		
-		drawing.setBounds(drawingLeftBorderWidth, drawingUpperBorderHeight+frameBorder, drawingWidth, drawingHeight);
-		
-		Curve curve=new Curve();
-		Curve curve1=new Curve();
-		drawing.add(curve);
-		drawing.add(curve1);
-		//drawing.setDimension(drawingWidth,drawingHeight);
-		//drawing.setScale_y(yMin, yMax);
-		//drawing.setScale_x(xMin, xMax);
-		
-		int dataSize=400;
-		for(int n=0;n<dataSize;n++)
-		{
-			curve.addValue(Math.sin((double)n/5));
-			curve1.addValue(Math.cos((double)n/5));
-		}
-		
-		set_xlabel("time");
-		set_ylabel("amplitude");
-		showAxis_x();
-		showAxis_y();
-		
-		CHRectangleBorder box=new CHRectangleBorder("none");
-		//CHBox box=new CHBox("");
-		this.add(box);
-		box.setBounds(0, 0,this.getWidth(),this.getHeight());
-		
-	}
-	
 	public void set_xlabel(String xLabel)
 	{
 		//this.xLabel=xLabel;
@@ -228,6 +172,23 @@ public class GraphPanel extends CHObject
 		yLabelObject.setBounds(xPos,drawingUpperBorderHeight+(yDimension-drawingUpperBorderHeight)/2-textHeigth,titleWidth,titleHeight);
 	}
 	
+	public void setBounds(int x, int y, int width, int height)
+	{
+		super.setBounds(x, y, width, height);
+		xDimension=width;
+		yDimension=height;
+		setPositions();
+		if(titleFrame!=null)titleFrame.setBounds(drawingLeftBorderWidth,frameBorder,titleWidth,titleHeight);
+		if(drawing!=null)drawing.setBounds(drawingLeftBorderWidth, drawingUpperBorderHeight+frameBorder, drawingWidth, drawingHeight);
+		if(box!=null)box.setBounds(0, 0,this.getWidth(),this.getHeight());
+		//this.setBounds(x, y, width, height);
+	}
+	
+	public void setScale_y(double min, double max)
+	{
+		drawing.setScale_y(min, max);
+	}
+	
 	public static void main(String[] args) 
 	{
 		JFrame fenster;
@@ -237,8 +198,9 @@ public class GraphPanel extends CHObject
 
 	    fenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	    GraphPanel graphTitle=new GraphPanel("chart title");
-		fenster.add(graphTitle);
+	    //GraphPanel graph1=new GraphPanel("chart title");
+		//fenster.add(graph1);
+		//graph1.setBounds(10,10,200,100);
 	
 		Curve curve=new Curve();
 		curve.setVisibleLinePoints(true);
@@ -249,8 +211,10 @@ public class GraphPanel extends CHObject
 		graph2.setPosition(10, 250);	
 		graph2.set_xlabel("time [s]");
 		graph2.set_ylabel("voltage [V]");
+		graph2.setBounds(30,30,300,200);
+		graph2.setScale_y(-1, 2);
 		
-	    GraphPanel graph3=new GraphPanel("rolling chart",curve);
+	    //GraphPanel graph3=new GraphPanel("rolling chart",curve);
 		//fenster.add(graph3);
 		//graph2.setBounds(0,0,270,300);
 		
