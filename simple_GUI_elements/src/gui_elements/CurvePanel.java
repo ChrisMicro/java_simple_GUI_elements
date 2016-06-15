@@ -21,7 +21,6 @@ public class CurvePanel extends JPanel
 	{
 		Rectangle r=this.getBounds();
 		
-		//curve.setDimension((int)r.getWidth(),(int)r.getHeight());
 		curve.setDimension((int)r.getWidth(),(int)r.getHeight());
 		curveList.add(curve);
 	}
@@ -29,6 +28,25 @@ public class CurvePanel extends JPanel
 	public void removeCurves()
 	{
 		curveList = new ArrayList<Curve>();
+	}
+	
+	public void setScale_y(double min, double max)
+	{
+		for(int n=0;n<curveList.size();n++)
+		{
+			curveList.get(n).setScale_y( min, max);
+		}
+	}
+	
+	@Override 
+	public void setBounds(int x, int y, int width, int height)
+	{
+		super.setBounds(x, y, width, height);
+		for(int n=0;n<curveList.size();n++)
+		{
+			curveList.get(n).setDimension(width, height);
+		}
+	
 	}
 	
 	@Override

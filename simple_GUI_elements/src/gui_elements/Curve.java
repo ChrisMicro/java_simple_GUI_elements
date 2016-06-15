@@ -69,6 +69,12 @@ public class Curve
 		yScale.setLimits(-0.1, 1, drawPanelDimension.getHeight());	
 	}
 	
+	public void setDimension(int x, int y)
+	{
+		setDimension(new Dimension(x,y));
+		//repaint();
+	}
+
 	public void setScale_x(double min, double max)
 	{
 		xScale.setLimits(min, max, drawPanelDimension.getWidth());
@@ -79,11 +85,7 @@ public class Curve
 		yScale.setLimits(min, max, drawPanelDimension.getHeight());	
 	}
 	
-	public void setDimension(int x, int y)
-	{
-		setDimension(new Dimension(x,y));
-		//repaint();
-	}
+
 	
 	public void addValue(double value)
 	{

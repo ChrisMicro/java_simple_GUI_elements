@@ -59,17 +59,20 @@ public class CHObject extends JPanel
 	{
 		super.paintComponent(g); // original paintComponent aus JPanel aufrufen
 
-		Rectangle r=this.getBounds();
-	
-		int thickness = 2;
-		Graphics2D g2;
-		g2=(Graphics2D) g;
-		Stroke oldStroke = g2.getStroke();
-		g2.setStroke(new BasicStroke(thickness));
+		if(showFrame) 
+		{
+			Rectangle r=this.getBounds();
 		
-		g.setColor(Color.white);
-		if(showFrame) g.drawRect(0,0,r.width,r.height);
-		g2.setStroke(oldStroke);
+			int thickness = 2;
+			Graphics2D g2;
+			g2=(Graphics2D) g;
+			Stroke oldStroke = g2.getStroke();
+			g2.setStroke(new BasicStroke(thickness));
+			
+			g.setColor(Color.white);
+			g.drawRect(0,0,r.width,r.height);
+			g2.setStroke(oldStroke);
+		}
 	}
 	
 	public static void main(String[] args) 
