@@ -81,7 +81,10 @@ public class CHValue extends CHObject
 	{
 		valueText.setText(value);
 	}
-	
+	public void setValue(String value)
+	{
+		valueText.setText(value);
+	}
 	public void setValue(float value)
 	{
 		valueText.setText(String.format("%.2f", value));

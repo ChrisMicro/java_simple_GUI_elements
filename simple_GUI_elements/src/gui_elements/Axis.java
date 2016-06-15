@@ -43,12 +43,16 @@ public class Axis extends CHObject
 		super.add(axisLabel);
 	}
 
+	public void setName(String name)
+	{
+		axisLabel.setValue(name);
+	}
 	
 	@Override 
 	public void setBounds(int x, int y, int width, int height)
 	{
 		super.setBounds(x, y, width, height);
-		int border=4;
+		int border=2;
 		int labelWidth=width-2*border;
 
 
@@ -63,8 +67,8 @@ public class Axis extends CHObject
 			}else
 			{
 				axisLabel.setBounds(border,height/2-textHeight/2,labelWidth,textHeight);
-				MaxLabel.setBounds(border,0,labelWidth,textHeight);
 				MinLabel.setBounds(border,height-textHeight-border,labelWidth,textHeight);
+				MaxLabel.setBounds(border,border,labelWidth,textHeight);
 			}
 		}
 
@@ -87,11 +91,9 @@ public class Axis extends CHObject
 		super.paintComponent(g); // original paintComponent aus JPanel aufrufen
 		//g.setColor(backGroundColor);
 
-		Rectangle r=this.getBounds();
+		//Rectangle r=this.getBounds();
 
-		//g.fillRect(1, 1,r.width-2,r.height-2);
-		g.drawRect(1, 1,r.width-2,r.height-2);
-		//g.setColor(Color.white);
+		//g.drawRect(0, 0,r.width-1,r.height-1);
 
 	}
 	
@@ -109,7 +111,7 @@ public class Axis extends CHObject
 		xAxis.setMinMax(0, 100);
 		
 		Axis yAxis=new Axis(Axis.AXIS_Y,"amplitude [V]");
-		yAxis.setBounds(0,0,100,300);
+		yAxis.setBounds(0,0,100,240);
 		yAxis.setMinMax(-1, 2);
 
 		window.add(xAxis);
